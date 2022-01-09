@@ -9,7 +9,7 @@
     "simulator": {
       "type": "ios.simulator",
       "device": {
-        "type": "iPhone 11"
+        "type": "iPhone 13"
       }
     }
   },
@@ -24,9 +24,11 @@
       "binaryPath": "android/app/build/outputs/apk/release/app-release.apk",
       "build": "cd android && ./gradlew assembleRelease assembleAndroidTest -DtestBuildType=release && cd .."
     },
-    "ios": {
+    "ios.debug": {
+      "name": "firstpich",
       "type": "ios.app",
-      "binaryPath": "SPECIFY_PATH_TO_YOUR_APP_BINARY"
+      "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/firstpich.app",
+      "build": "xcodebuild -workspace ios/firstpich.xcworkspace -scheme firstpich -sdk iphonesimulator -derivedDataPath ios/build"
     }
   },
   "configurations": {
@@ -38,9 +40,9 @@
       "device": "emulator",
       "app": "android.release"
     },
-    "ios": {
+    "ios.sim.debug": {
       "device": "simulator",
-      "app": "ios"
+      "app": "ios.debug"
     }
   },
   "testRunner": "jest",
