@@ -15,6 +15,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  TouchableOpacity,
   useColorScheme,
   View,
 } from 'react-native';
@@ -29,7 +30,7 @@ import {
 
 const Section: React.FC<{
   title: string;
-}> = ({children, title}) => {
+}> = ({ children, title }) => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
@@ -73,6 +74,11 @@ const App = () => {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
+          <View>
+            <TouchableOpacity testID="MyUniqueId123">
+              <Text>Some button</Text>
+            </TouchableOpacity>
+          </View>
           <Section title="Step One">
             Edit <Text style={styles.highlight}>App.tsx</Text> to change this
             screen and then come back to see your edits.
