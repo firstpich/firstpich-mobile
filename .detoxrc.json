@@ -3,7 +3,7 @@
     "emulator": {
       "type": "android.emulator",
       "device": {
-        "avdName": "Pixel_3_API_30_AOSP"
+        "avdName": "Pixel_3a_API_30"
       }
     },
     "simulator": {

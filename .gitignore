@@ -61,3 +61,6 @@ buck-out/
 
 #ignore device logs
 *.log
+
+# Watchman cookies
+*.watchman
