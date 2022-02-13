@@ -1,6 +1,6 @@
 import React from 'react';
 import {TailwindProvider} from 'tailwind-rn';
-import MyComponent from './components/MyComponent';
+import MyComponent from './src/components/MyComponent';
 import utilities from './tailwind.json';
 
 export default function App() {
