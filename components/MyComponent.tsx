@@ -12,6 +12,9 @@ export default function MyComponent() {
       <Text style={tailwind('text-green-400 text-3xl')}>
         Let's build firstpich
       </Text>
+      <Text style={tailwind('text-green-400 text-xl')}>
+        Let's build firstpich
+      </Text>
     </View>
   );
 }

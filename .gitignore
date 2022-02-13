@@ -65,3 +65,7 @@ buck-out/
 
 # Watchman cookies
 *.watchman
+
+# tailwind-rn auto generated files
+tailwind.css
+tailwind.json
