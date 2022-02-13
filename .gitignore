@@ -36,6 +36,7 @@ node_modules/
 npm-debug.log
 yarn-error.log
 
+
 # BUCK
 buck-out/
 \.buckd/
@@ -64,3 +65,7 @@ buck-out/
 
 # Watchman cookies
 *.watchman
+
+# tailwind-rn auto generated files
+tailwind.css
+tailwind.json
