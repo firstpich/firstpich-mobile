@@ -9,18 +9,23 @@
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "build:tailwind": "tailwindcss --input input.css --output tailwind.css --no-autoprefixer && tailwind-rn",
-    "dev:tailwind": "concurrently \"tailwindcss --input input.css --output tailwind.css --no-autoprefixer --watch\" \"tailwind-rn --watch\""
+    "dev:tailwind": "concurrently \"tailwindcss --input input.css --output tailwind.css --no-autoprefixer --watch\" \"tailwind-rn --watch\"",
+    "dev:runall": "concurrently \"yarn start\" \"yarn dev:tailwind\" \"yarn android\""
   },
   "dependencies": {
+    "@svgr/plugin-svgo": "^6.2.0",
     "react": "17.0.2",
     "react-native": "0.66.4",
+    "react-native-svg": "^12.1.1",
     "tailwind-rn": "^4.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/runtime": "^7.12.5",
     "@react-native-community/eslint-config": "^2.0.0",
+    "@svgr/cli": "^6.2.1",
     "@types/jest": "^26.0.23",
+    "@types/node": "12",
     "@types/react-native": "^0.66.4",
     "@types/react-test-renderer": "^17.0.1",
     "@typescript-eslint/eslint-plugin": "^5.7.0",
@@ -32,6 +37,7 @@
     "jest": "^27.4.7",
     "metro-react-native-babel-preset": "^0.66.2",
     "postcss": "^8.4.6",
+    "react-native-svg-transformer": "^1.0.0",
     "react-test-renderer": "17.0.2",
     "tailwindcss": "^3.0.22",
     "typescript": "^4.4.4"
