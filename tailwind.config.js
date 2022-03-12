@@ -17,8 +17,11 @@ module.exports = {
         'input-fields-bg': '#31343C',
         'dark-grey': '#1D1D1D',
       },
+      fontFamily: {
+        montserrat: ['Montserrat'],
+      },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
   corePlugins: require('tailwind-rn/unsupported-core-plugins'),
 };
