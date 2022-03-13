@@ -1,5 +1,5 @@
 import React from 'react';
-import {TailwindProvider} from 'tailwind-rn';
+import { TailwindProvider } from 'tailwind-rn';
 import utilities from './tailwind.json';
 
 // import MyComponent from './src/components/MyComponent';
