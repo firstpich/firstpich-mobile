@@ -2,8 +2,8 @@ import React from 'react';
 import {View, Text, ImageBackground} from 'react-native';
 import {useTailwind} from 'tailwind-rn';
 
-import FpLogo from '../icons/fpLogo.svg';
-import BgShade from '../icons/bgShade.png';
+import FpLogo from '../../assets/icons/fpLogo.svg';
+import BgShade from '../../assets/icons/bgShade.png';
 
 const Home = () => {
   const tailwind = useTailwind();

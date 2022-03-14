@@ -3,9 +3,9 @@ import {TailwindProvider} from 'tailwind-rn';
 
 import SplashScreen from 'react-native-splash-screen';
 
-import Home from './src/pages/Home';
+import Home from './pages/Home';
 
-import utilities from './tailwind.json';
+import utilities from '../tailwind.json';
 
 export default function App() {
   useEffect(() => {
