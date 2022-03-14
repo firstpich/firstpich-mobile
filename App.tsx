@@ -1,16 +1,20 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {TailwindProvider} from 'tailwind-rn';
+
+import SplashScreen from 'react-native-splash-screen';
+
+import Home from './src/pages/Home';
+
 import utilities from './tailwind.json';
 
-// import MyComponent from './src/components/MyComponent';
-
-// Pages
-import SplashScreen from './src/pages/SplashScreenMain';
-
 export default function App() {
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
+
   return (
     <TailwindProvider utilities={utilities}>
-      <SplashScreen />
+      <Home />
     </TailwindProvider>
   );
 }
