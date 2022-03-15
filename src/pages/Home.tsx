@@ -18,9 +18,6 @@ const Home = () => {
           <Text style={tailwind('text-white font-mon-bold text-2xl')}>
             firstpich
           </Text>
-          <Text style={tailwind('text-white font-mon-bold text-2xl')}>
-            firstpich
-          </Text>
         </View>
         <ImageBackground
           source={BgShade}
