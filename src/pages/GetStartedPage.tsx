@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, ImageBackground, Alert} from 'react-native';
+import {View, Text, ImageBackground} from 'react-native';
 import {useTailwind} from 'tailwind-rn';
 
 import GetStartedBg from '../../assets/icons/getStartedBg.png';
