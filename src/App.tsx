@@ -5,7 +5,8 @@ import SplashScreen from 'react-native-splash-screen';
 
 // import Home from './pages/Home';
 // import IntroPage from './pages/IntroPage';
-import GetStartedPage from './pages/GetStartedPage';
+// import GetStartedPage from './pages/GetStartedPage';
+import SignUp from './pages/SignUp';
 
 import utilities from '../tailwind.json';
 
@@ -18,7 +19,8 @@ export default function App() {
     <TailwindProvider utilities={utilities}>
       {/* <Home /> */}
       {/* <IntroPage /> */}
-      <GetStartedPage />
+      {/* <GetStartedPage /> */}
+      <SignUp />
     </TailwindProvider>
   );
 }

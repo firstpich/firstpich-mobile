@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, ImageBackground, Alert} from 'react-native';
+import {View, Text, ImageBackground} from 'react-native';
 import {useTailwind} from 'tailwind-rn';
 
 import GetStartedBg from '../../assets/icons/getStartedBg.png';
@@ -18,10 +18,10 @@ const Home = () => {
               firstpich
             </Text>
           </View>
-          <View style={tailwind('flex-1 items-center justify-center -mt-24')}>
+          <View style={tailwind('flex-1 items-center justify-center -mt-56')}>
             <Text
               style={tailwind(
-                'ml-3 text-white w-48 text-center font-mon-bold',
+                'ml-3 text-white w-48 text-center font-mon-bold text-lg',
               )}>
               Stories just for you to listen & read
             </Text>

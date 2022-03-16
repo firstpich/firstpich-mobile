@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, ImageBackground, Dimensions, Alert} from 'react-native';
+import {View, Text, ImageBackground, Dimensions} from 'react-native';
 import {useTailwind} from 'tailwind-rn';
 
 import Carousel, {Pagination} from 'react-native-snap-carousel';
@@ -15,7 +15,7 @@ const carouselWords = [
   'Create audiobook right from your hand and earn.',
 ];
 
-const Home = () => {
+const IntroPage = ({navigation}: {navigation: any}) => {
   const tailwind = useTailwind();
   const [activeSlide, setActiveSlide] = useState<number>(0);
 
@@ -66,9 +66,7 @@ const Home = () => {
           <FpButton
             title="Next"
             className="mx-4"
-            onPress={() => {
-              Alert.alert(String(activeSlide));
-            }}
+            onPress={() => navigation.navigate('Intro Page')}
           />
         </View>
       </ImageBackground>
@@ -76,4 +74,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default IntroPage;
