@@ -2,8 +2,7 @@ import React, {useState} from 'react';
 import {View, Text, ImageBackground, Dimensions, Alert} from 'react-native';
 import {useTailwind} from 'tailwind-rn';
 
-import Carousel from 'react-native-snap-carousel';
-import Dots from 'react-native-dots-pagination';
+import Carousel, {Pagination} from 'react-native-snap-carousel';
 
 import FpLogo from '../../assets/icons/fpLogo.svg';
 import BgShade from '../../assets/icons/bgShade.png';
@@ -18,57 +17,61 @@ const carouselWords = [
 
 const Home = () => {
   const tailwind = useTailwind();
-  const [carouselRef, setCarouselRef] = useState<Carousel<string> | null>(null);
+  const [activeSlide, setActiveSlide] = useState<number>(0);
 
   const renderItem = ({item}: {item: string}) => (
-    <View style={tailwind('')}>
-      <Text style={tailwind('text-white')}>{item}</Text>
+    <View style={tailwind('w-80 px-3')}>
+      <Text style={tailwind('font-bold text-white text-lg')}>{item}</Text>
     </View>
   );
 
   return (
     <View style={tailwind('bg-primary h-full')}>
-      <View style={tailwind('h-full w-full')}>
+      <ImageBackground source={BgShade} imageStyle={tailwind('opacity-30')}>
         <View style={tailwind('flex flex-col justify-center h-full')}>
-          <View style={tailwind('flex flex-row items-center pl-4 -mt-20')}>
+          <View style={tailwind('flex flex-row items-center pl-3 -mt-20')}>
             <FpLogo width={38} height={38} />
             <Text style={tailwind('ml-3 text-white font-mon-bold text-3xl')}>
               firstpich
             </Text>
           </View>
 
-          <View style={tailwind('flex flex-row items-center px-4 mt-32')}>
+          <View style={tailwind('flex flex-col items-start mt-32')}>
             <Carousel
-              ref={r => setCarouselRef(r)}
+              onSnapToItem={idx => setActiveSlide(idx)}
               layout={'default'}
               data={carouselWords}
               renderItem={renderItem}
-              sliderWidth={Dimensions.get('window').width - 40}
-              itemWidth={Dimensions.get('window').width - 40}
+              sliderWidth={Dimensions.get('window').width}
+              itemWidth={Dimensions.get('window').width}
               autoplay={true}
               enableMomentum={false}
               lockScrollWhileSnapping={true}
               loop={true}
+              scrollEnabled={false}
+            />
+            <Pagination
+              dotsLength={carouselWords.length}
+              activeDotIndex={activeSlide}
+              containerStyle={tailwind('-ml-2')}
+              dotStyle={tailwind('bg-white w-3 h-3 rounded-full')}
+              inactiveDotStyle={{}}
+              inactiveDotOpacity={0.4}
+              inactiveDotScale={1.0}
+              dotContainerStyle={tailwind('mx-1')}
             />
           </View>
-          <Dots length={4} active={1} />
         </View>
         <View style={tailwind('absolute w-full bottom-6')}>
           <FpButton
             title="Next"
             className="mx-4"
             onPress={() => {
-              Alert.alert(String(carouselRef?.currentIndex));
+              Alert.alert(String(activeSlide));
             }}
           />
         </View>
-      </View>
-      <ImageBackground
-        source={BgShade}
-        style={{
-          ...tailwind('flex-1 justify-center opacity-20'),
-        }}
-      />
+      </ImageBackground>
     </View>
   );
 };
