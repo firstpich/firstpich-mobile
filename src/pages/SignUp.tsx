@@ -1,12 +1,13 @@
-import React from 'react';
-import {View, Text, TextInput} from 'react-native';
-import {useTailwind} from 'tailwind-rn';
+import React, { useState } from 'react';
+import { View, Text, TextInput, Alert } from 'react-native';
+import { useTailwind } from 'tailwind-rn';
 
 // import LoginScreen from 'react-native-login-screen';
 
 import FpButton from '../components/Button';
 
 const SignUp = () => {
+  const [mobileNumber, setMobileNumber] = useState<string>('');
   const tailwind = useTailwind();
 
   return (
@@ -28,14 +29,22 @@ const SignUp = () => {
 
       <View style={tailwind('flex justify-center ml-4 py-12')}>
         <View>
+          <Text
+            style={tailwind(
+              'text-white font-mon-semibold absolute z-10 h-12 mt-4 ml-2 pt-px',
+            )}>
+            +91
+          </Text>
           <TextInput
             placeholder="Mobile Number"
             placeholderTextColor="#FFFFFF"
             keyboardType="number-pad"
-            maxLength={10}
+            maxLength={14}
             autoComplete="tel"
+            onChangeText={text => setMobileNumber(text)}
+            value={mobileNumber}
             style={tailwind(
-              'bg-input-fields-bg rounded-md w-11/12 text-white p-3 text-base',
+              'bg-input-fields-bg rounded-md w-11/12 text-white p-3 pl-10 text-base',
             )}
           />
         </View>
