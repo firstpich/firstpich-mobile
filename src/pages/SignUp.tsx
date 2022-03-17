@@ -7,16 +7,35 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import type {RootStackParamList} from '../App';
 
 import FpButton from '../components/Button';
+import {gql, useMutation} from '@apollo/client';
 
 type GetStartedNavigationProps = NativeStackNavigationProp<
   RootStackParamList,
   'SignUp'
 >;
 
+const SIGNUP = gql`
+  mutation sendOTP($phone: Phone!) {
+    sendOTP(phone: $phone)
+  }
+`;
+
 const SignUp = () => {
   const navigation = useNavigation<GetStartedNavigationProps>();
   const [mobileNumber, setMobileNumber] = useState<string>('');
   const tailwind = useTailwind();
+  const [signUp, {}] = useMutation(SIGNUP);
+
+  const onPress = () => {
+    navigation.navigate('OtpPage');
+    signUp({
+      variables: {
+        phone: {
+          phone: mobileNumber,
+        },
+      },
+    });
+  };
 
   return (
     <View style={tailwind('bg-primary h-full')}>
@@ -60,11 +79,7 @@ const SignUp = () => {
         </Text>
       </View>
       <View style={tailwind('mb-6')}>
-        <FpButton
-          title="Login"
-          className="mx-4"
-          onPress={() => navigation.navigate('OtpPage')}
-        />
+        <FpButton title="Login" className="mx-4" onPress={onPress} />
       </View>
     </View>
   );
