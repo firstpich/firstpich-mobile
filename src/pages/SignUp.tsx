@@ -37,7 +37,7 @@ const SignUp = () => {
             placeholder="Mobile Number"
             placeholderTextColor="#FFFFFF"
             keyboardType="number-pad"
-            maxLength={14}
+            maxLength={10}
             autoComplete="tel"
             onChangeText={text => setMobileNumber(text)}
             value={mobileNumber}
