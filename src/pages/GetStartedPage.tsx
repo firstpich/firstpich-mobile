@@ -2,10 +2,20 @@ import React from 'react';
 import {View, Text, ImageBackground} from 'react-native';
 import {useTailwind} from 'tailwind-rn';
 
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+
+import type {RootStackParamList} from '../App';
 import GetStartedBg from '../../assets/icons/getStartedBg.png';
 import FpButton from '../components/Button';
 
-const GetStartedPage = ({navigation}: {navigation: any}) => {
+type GetStartedNavigationProps = NativeStackNavigationProp<
+  RootStackParamList,
+  'GetStartedPage'
+>;
+
+const GetStartedPage = () => {
+  const navigation = useNavigation<GetStartedNavigationProps>();
   const tailwind = useTailwind();
 
   return (
