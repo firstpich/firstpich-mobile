@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, Text, ImageBackground } from 'react-native';
-import { useTailwind } from 'tailwind-rn';
+import {View, Text, ImageBackground} from 'react-native';
+import {useTailwind} from 'tailwind-rn';
 
 import GetStartedBg from '../../assets/icons/getStartedBg.png';
 import FpButton from '../components/Button';
 
-const GetStartedPage = ({ navigation }) => {
+const GetStartedPage = ({navigation}: {navigation: any}) => {
   const tailwind = useTailwind();
 
   return (
@@ -28,7 +28,11 @@ const GetStartedPage = ({ navigation }) => {
           </View>
         </View>
         <View style={tailwind('absolute w-full bottom-6')}>
-          <FpButton title="Get Started" className="mx-4" onPress={() => navigation.navigate('SignUp')} />
+          <FpButton
+            title="Get Started"
+            className="mx-4"
+            onPress={() => navigation.navigate('SignUp')}
+          />
         </View>
       </ImageBackground>
     </View>
