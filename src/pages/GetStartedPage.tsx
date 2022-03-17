@@ -5,7 +5,7 @@ import {useTailwind} from 'tailwind-rn';
 import GetStartedBg from '../../assets/icons/getStartedBg.png';
 import FpButton from '../components/Button';
 
-const Home = () => {
+const GetStartedPage = ({navigation}: {navigation: any}) => {
   const tailwind = useTailwind();
 
   return (
@@ -28,11 +28,15 @@ const Home = () => {
           </View>
         </View>
         <View style={tailwind('absolute w-full bottom-6')}>
-          <FpButton title="Get Started" className="mx-4" />
+          <FpButton
+            title="Get Started"
+            className="mx-4"
+            onPress={() => navigation.navigate('SignUp')}
+          />
         </View>
       </ImageBackground>
     </View>
   );
 };
 
-export default Home;
+export default GetStartedPage;

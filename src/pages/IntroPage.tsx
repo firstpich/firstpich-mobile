@@ -66,7 +66,7 @@ const IntroPage = ({navigation}: {navigation: any}) => {
           <FpButton
             title="Next"
             className="mx-4"
-            onPress={() => navigation.navigate('Intro Page')}
+            onPress={() => navigation.navigate('GetStartedPage')}
           />
         </View>
       </ImageBackground>
