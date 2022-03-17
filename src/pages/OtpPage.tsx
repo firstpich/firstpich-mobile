@@ -59,9 +59,9 @@ const OtpPage = () => {
         />
       </View>
       <View style={tailwind('flex flex-row justify-center items-center py-5')}>
-        <Text style={tailwind('mr-1')}>Haven’t recieved yet?</Text>
+        <Text style={tailwind('mr-1 text-white')}>Haven’t recieved yet?</Text>
         <TouchableOpacity>
-          <Text style={tailwind('font-mon-bold ')}>Resend OTP</Text>
+          <Text style={tailwind('font-mon-bold text-white')}>Resend OTP</Text>
         </TouchableOpacity>
       </View>
     </View>
