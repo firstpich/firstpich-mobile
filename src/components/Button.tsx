@@ -4,12 +4,18 @@ import {useTailwind} from 'tailwind-rn';
 
 type ButtonProps = {
   title: string;
+  className?: string;
+  onPress?: (() => void) | undefined;
 };
 
-const FpButton: React.FC<ButtonProps> = ({title}) => {
+const FpButton: React.FC<ButtonProps> = ({
+  title,
+  className = '',
+  onPress = () => {},
+}) => {
   const tailwind = useTailwind();
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={onPress}>
       <View
         style={tailwind(
           'flex bg-white w-72 h-12 rounded-3xl justify-center items-center',
