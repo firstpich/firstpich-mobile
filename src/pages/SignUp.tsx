@@ -2,9 +2,19 @@ import React, {useState} from 'react';
 import {View, Text, TextInput} from 'react-native';
 import {useTailwind} from 'tailwind-rn';
 
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import type {RootStackParamList} from '../App';
+
 import FpButton from '../components/Button';
 
+type GetStartedNavigationProps = NativeStackNavigationProp<
+  RootStackParamList,
+  'SignUp'
+>;
+
 const SignUp = () => {
+  const navigation = useNavigation<GetStartedNavigationProps>();
   const [mobileNumber, setMobileNumber] = useState<string>('');
   const tailwind = useTailwind();
 
@@ -18,8 +28,7 @@ const SignUp = () => {
           style={tailwind('text-white font-mon-bold text-4xl tracking-wider')}>
           firstpich
         </Text>
-        <Text
-          style={tailwind('text-white font-mon-light text-sm mt-2 w-11/12')}>
+        <Text style={tailwind('text-white font-mon-thin text-sm mt-2 w-11/12')}>
           firstpich is full of wonders and we know you are excited as much as we
           are excited
         </Text>
@@ -51,7 +60,11 @@ const SignUp = () => {
         </Text>
       </View>
       <View style={tailwind('mb-6')}>
-        <FpButton title="Login" className="mx-4" />
+        <FpButton
+          title="Login"
+          className="mx-4"
+          onPress={() => navigation.navigate('OtpPage')}
+        />
       </View>
     </View>
   );

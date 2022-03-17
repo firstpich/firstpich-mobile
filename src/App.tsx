@@ -9,10 +9,18 @@ import SplashScreen from 'react-native-splash-screen';
 import IntroPage from './pages/IntroPage';
 import GetStartedPage from './pages/GetStartedPage';
 import SignUp from './pages/SignUp';
+import OtpPage from './pages/OtpPage';
 
 import utilities from '../tailwind.json';
 
-const Stack = createNativeStackNavigator();
+export type RootStackParamList = {
+  IntroPage: undefined;
+  GetStartedPage: undefined;
+  SignUp: undefined;
+  OtpPage: undefined;
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   useEffect(() => {
@@ -28,6 +36,7 @@ export default function App() {
           <Stack.Screen name="IntroPage" component={IntroPage} />
           <Stack.Screen name="GetStartedPage" component={GetStartedPage} />
           <Stack.Screen name="SignUp" component={SignUp} />
+          <Stack.Screen name="OtpPage" component={OtpPage} />
         </Stack.Navigator>
       </NavigationContainer>
     </TailwindProvider>

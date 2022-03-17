@@ -2,11 +2,20 @@ import React, {useState} from 'react';
 import {View, Text, ImageBackground, Dimensions} from 'react-native';
 import {useTailwind} from 'tailwind-rn';
 
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import type {RootStackParamList} from '../App';
+
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 
 import FpLogo from '../../assets/icons/fpLogo.svg';
 import BgShade from '../../assets/icons/bgShade.png';
 import FpButton from '../components/Button';
+
+type IntroPageNavigationProps = NativeStackNavigationProp<
+  RootStackParamList,
+  'IntroPage'
+>;
 
 const carouselWords = [
   'Create audiobook right from your hand and earn.',
@@ -15,7 +24,8 @@ const carouselWords = [
   'Create audiobook right from your hand and earn.',
 ];
 
-const IntroPage = ({navigation}: {navigation: any}) => {
+const IntroPage = () => {
+  const navigation = useNavigation<IntroPageNavigationProps>();
   const tailwind = useTailwind();
   const [activeSlide, setActiveSlide] = useState<number>(0);
 
