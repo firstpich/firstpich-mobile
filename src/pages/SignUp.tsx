@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Alert } from 'react-native';
-import { useTailwind } from 'tailwind-rn';
-
-// import LoginScreen from 'react-native-login-screen';
+import React, {useState} from 'react';
+import {View, Text, TextInput} from 'react-native';
+import {useTailwind} from 'tailwind-rn';
 
 import FpButton from '../components/Button';
 
