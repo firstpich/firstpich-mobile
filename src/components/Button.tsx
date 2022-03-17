@@ -12,7 +12,7 @@ const FpButton: React.FC<ButtonProps> = ({title}) => {
     <TouchableOpacity>
       <View
         style={tailwind(
-          'flex bg-white w-72 h-11 rounded-3xl justify-center items-center',
+          'flex bg-white w-72 h-12 rounded-3xl justify-center items-center',
         )}>
         <Text style={tailwind('text-black font-bold text-lg')}>{title}</Text>
       </View>
