@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, TextInput } from 'react-native';
-import { useTailwind } from 'tailwind-rn';
+import {View, Text, TextInput} from 'react-native';
+import {useTailwind} from 'tailwind-rn';
 
 // import LoginScreen from 'react-native-login-screen';
 

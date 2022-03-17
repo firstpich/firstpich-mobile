@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { View, Text, ImageBackground, Dimensions } from 'react-native';
-import { useTailwind } from 'tailwind-rn';
+import React, {useState} from 'react';
+import {View, Text, ImageBackground, Dimensions} from 'react-native';
+import {useTailwind} from 'tailwind-rn';
 
-import Carousel, { Pagination } from 'react-native-snap-carousel';
+import Carousel, {Pagination} from 'react-native-snap-carousel';
 
 import FpLogo from '../../assets/icons/fpLogo.svg';
 import BgShade from '../../assets/icons/bgShade.png';
@@ -15,11 +15,11 @@ const carouselWords = [
   'Create audiobook right from your hand and earn.',
 ];
 
-const IntroPage = ({ navigation }) => {
+const IntroPage = ({navigation}: {navigation: any}) => {
   const tailwind = useTailwind();
   const [activeSlide, setActiveSlide] = useState<number>(0);
 
-  const renderItem = ({ item }: { item: string }) => (
+  const renderItem = ({item}: {item: string}) => (
     <View style={tailwind('w-80 px-3')}>
       <Text style={tailwind('font-bold text-white text-lg')}>{item}</Text>
     </View>

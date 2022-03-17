@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import { TailwindProvider } from 'tailwind-rn';
+import React, {useEffect} from 'react';
+import {TailwindProvider} from 'tailwind-rn';
 
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import SplashScreen from 'react-native-splash-screen';
 
@@ -23,7 +23,7 @@ export default function App() {
     <TailwindProvider utilities={utilities}>
       <NavigationContainer>
         <Stack.Navigator
-          screenOptions={{ headerShown: false }}
+          screenOptions={{headerShown: false}}
           initialRouteName="IntroPage">
           <Stack.Screen name="IntroPage" component={IntroPage} />
           <Stack.Screen name="GetStartedPage" component={GetStartedPage} />
