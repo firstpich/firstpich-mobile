@@ -4,7 +4,11 @@ import {TailwindProvider} from 'tailwind-rn';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
+import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
+
 import SplashScreen from 'react-native-splash-screen';
+
+import {BACKEND_URI} from './config';
 
 import IntroPage from './pages/IntroPage';
 import GetStartedPage from './pages/GetStartedPage';
@@ -22,23 +26,30 @@ export type RootStackParamList = {
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
+const client = new ApolloClient({
+  uri: BACKEND_URI,
+  cache: new InMemoryCache(),
+});
+
 export default function App() {
   useEffect(() => {
     SplashScreen.hide();
   }, []);
 
   return (
-    <TailwindProvider utilities={utilities}>
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{headerShown: false}}
-          initialRouteName="IntroPage">
-          <Stack.Screen name="IntroPage" component={IntroPage} />
-          <Stack.Screen name="GetStartedPage" component={GetStartedPage} />
-          <Stack.Screen name="SignUp" component={SignUp} />
-          <Stack.Screen name="OtpPage" component={OtpPage} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </TailwindProvider>
+    <ApolloProvider client={client}>
+      <TailwindProvider utilities={utilities}>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{headerShown: false}}
+            initialRouteName="IntroPage">
+            <Stack.Screen name="IntroPage" component={IntroPage} />
+            <Stack.Screen name="GetStartedPage" component={GetStartedPage} />
+            <Stack.Screen name="SignUp" component={SignUp} />
+            <Stack.Screen name="OtpPage" component={OtpPage} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </TailwindProvider>
+    </ApolloProvider>
   );
 }

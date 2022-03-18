@@ -15,9 +15,11 @@
     "kill": "kill $(lsof -t -i:8081)"
   },
   "dependencies": {
+    "@apollo/client": "^3.5.10",
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/native-stack": "^6.5.0",
     "@svgr/plugin-svgo": "^6.2.0",
+    "graphql": "^16.3.0",
     "react": "17.0.2",
     "react-native": "0.66.4",
     "react-native-dots-pagination": "^0.2.0",
@@ -41,6 +43,7 @@
     "@types/react-test-renderer": "^17.0.1",
     "@typescript-eslint/eslint-plugin": "^5.7.0",
     "@typescript-eslint/parser": "^5.7.0",
+    "apollo-codegen": "^0.20.2",
     "babel-jest": "^26.6.3",
     "concurrently": "^7.0.0",
     "detox": "^19.4.1",
