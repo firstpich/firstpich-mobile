@@ -14,6 +14,7 @@ import IntroPage from './pages/IntroPage';
 import GetStartedPage from './pages/GetStartedPage';
 import SignUp from './pages/SignUp';
 import OtpPage from './pages/OtpPage';
+import AboutYouPage from './pages/AboutYouPage';
 
 import utilities from '../tailwind.json';
 
@@ -22,6 +23,7 @@ export type RootStackParamList = {
   GetStartedPage: undefined;
   SignUp: undefined;
   OtpPage: undefined;
+  AboutYouPage: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -47,6 +49,7 @@ export default function App() {
             <Stack.Screen name="GetStartedPage" component={GetStartedPage} />
             <Stack.Screen name="SignUp" component={SignUp} />
             <Stack.Screen name="OtpPage" component={OtpPage} />
+            <Stack.Screen name="AboutYouPage" component={AboutYouPage} />
           </Stack.Navigator>
         </NavigationContainer>
       </TailwindProvider>

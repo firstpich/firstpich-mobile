@@ -55,7 +55,7 @@ const OtpPage = () => {
         <FpButton
           title="Enter OTP"
           className="mx-4"
-          onPress={() => navigation.navigate('OtpPage')}
+          onPress={() => navigation.navigate('AboutYouPage')}
         />
       </View>
       <View style={tailwind('flex flex-row justify-center items-center py-5')}>
