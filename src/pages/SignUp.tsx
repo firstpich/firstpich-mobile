@@ -41,7 +41,7 @@ const SignUp = () => {
       },
     }).then(({errors}) => {
       if (!errors) {
-        navigation.navigate('OtpPage');
+        navigation.navigate('OtpPage', {phone: mobileNumber});
       }
     });
   };

@@ -16,7 +16,7 @@ import {BACKEND_URI} from './config';
 import IntroPage from './pages/IntroPage';
 import GetStartedPage from './pages/GetStartedPage';
 import SignUp from './pages/SignUp';
-import OtpPage from './pages/OtpPage';
+import OtpPage, {OtpPageParams} from './pages/OtpPage';
 import AboutYouPage from './pages/AboutYouPage';
 
 import utilities from '../tailwind.json';
@@ -25,7 +25,7 @@ export type RootStackParamList = {
   IntroPage: undefined;
   GetStartedPage: undefined;
   SignUp: undefined;
-  OtpPage: undefined;
+  OtpPage: OtpPageParams;
   AboutYouPage: undefined;
 };
 
