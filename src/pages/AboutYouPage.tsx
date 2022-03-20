@@ -3,13 +3,13 @@ import {View} from 'react-native';
 import {useTailwind} from 'tailwind-rn';
 
 import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {StackNavigationProp} from '@react-navigation/stack';
 import type {RootStackParamList} from '../App';
 
 import FpButton from '../components/Button';
 import BackButton from '../components/BackButton';
 
-type GetStartedNavigationProps = NativeStackNavigationProp<
+type GetStartedNavigationProps = StackNavigationProp<
   RootStackParamList,
   'AboutYouPage'
 >;
