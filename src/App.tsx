@@ -2,7 +2,10 @@ import React, {useEffect} from 'react';
 import {TailwindProvider} from 'tailwind-rn';
 
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {
+  CardStyleInterpolators,
+  createStackNavigator,
+} from '@react-navigation/stack';
 
 import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
 
@@ -26,7 +29,7 @@ export type RootStackParamList = {
   AboutYouPage: undefined;
 };
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createStackNavigator<RootStackParamList>();
 
 const client = new ApolloClient({
   uri: BACKEND_URI,
@@ -45,11 +48,41 @@ export default function App() {
           <Stack.Navigator
             screenOptions={{headerShown: false}}
             initialRouteName="IntroPage">
-            <Stack.Screen name="IntroPage" component={IntroPage} />
-            <Stack.Screen name="GetStartedPage" component={GetStartedPage} />
-            <Stack.Screen name="SignUp" component={SignUp} />
-            <Stack.Screen name="OtpPage" component={OtpPage} />
-            <Stack.Screen name="AboutYouPage" component={AboutYouPage} />
+            <Stack.Screen
+              name="IntroPage"
+              options={{
+                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+              }}
+              component={IntroPage}
+            />
+            <Stack.Screen
+              name="GetStartedPage"
+              options={{
+                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+              }}
+              component={GetStartedPage}
+            />
+            <Stack.Screen
+              name="SignUp"
+              options={{
+                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+              }}
+              component={SignUp}
+            />
+            <Stack.Screen
+              name="OtpPage"
+              options={{
+                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+              }}
+              component={OtpPage}
+            />
+            <Stack.Screen
+              name="AboutYouPage"
+              options={{
+                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+              }}
+              component={AboutYouPage}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </TailwindProvider>

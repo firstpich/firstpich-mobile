@@ -4,13 +4,13 @@ import {useTailwind} from 'tailwind-rn';
 
 import {useNavigation} from '@react-navigation/native';
 import {gql, useMutation} from '@apollo/client';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {StackNavigationProp} from '@react-navigation/stack';
 import type {RootStackParamList} from '../App';
 
 import FpButton from '../components/Button';
 import BackButton from '../components/BackButton';
 
-type GetStartedNavigationProps = NativeStackNavigationProp<
+type GetStartedNavigationProps = StackNavigationProp<
   RootStackParamList,
   'SignUp'
 >;
