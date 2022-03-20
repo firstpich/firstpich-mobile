@@ -9,12 +9,16 @@ import type {RootStackParamList} from '../App';
 import FpButton from '../components/Button';
 import BackButton from '../components/BackButton';
 
+export type OtpPageParams = {
+  phone: string;
+};
+
 type GetStartedNavigationProps = StackNavigationProp<
   RootStackParamList,
   'OtpPage'
 >;
 
-const OtpPage = () => {
+const OtpPage = ({phone}: OtpPageParams) => {
   const navigation = useNavigation<GetStartedNavigationProps>();
   const tailwind = useTailwind();
 

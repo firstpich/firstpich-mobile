@@ -25,16 +25,24 @@ const SignUp = () => {
   const navigation = useNavigation<GetStartedNavigationProps>();
   const [mobileNumber, setMobileNumber] = useState<string>('');
   const tailwind = useTailwind();
-  const [signUp, {}] = useMutation(SIGNUP);
+
+  const [signUp, {error, loading}] = useMutation(SIGNUP, {
+    errorPolicy: 'all',
+  });
+
+  const thereIsError = (error && error.graphQLErrors.length !== 0) || false;
 
   const onPressLoginButton = () => {
-    navigation.navigate('OtpPage');
     signUp({
       variables: {
         phone: {
           phone: mobileNumber,
         },
       },
+    }).then(({errors}) => {
+      if (!errors) {
+        navigation.navigate('OtpPage');
+      }
     });
   };
 
@@ -78,16 +86,27 @@ const SignUp = () => {
             onChangeText={text => setMobileNumber(text)}
             value={mobileNumber}
             style={tailwind(
-              'bg-input-fields-bg rounded-md w-11/12 text-white p-3 pl-10 text-base',
+              'bg-input-fields-bg rounded-md w-11/12 text-white p-3 pl-10 text-base ' +
+                (thereIsError ? 'border-red-500 border' : ''),
             )}
           />
         </View>
+        {thereIsError && (
+          <Text style={tailwind('mt-2 text-red-500 ml-0.5 text-xs')}>
+            Entered phone number looks invalid
+          </Text>
+        )}
         <Text style={tailwind('mt-2 text-white ml-0.5 text-xs')}>
           You will recieve an OTP on the above number
         </Text>
       </View>
       <View style={tailwind('mb-6')}>
-        <FpButton title="Login" className="mx-4" onPress={onPressLoginButton} />
+        <FpButton
+          title="Login"
+          className="mx-4"
+          disabled={loading}
+          onPress={onPressLoginButton}
+        />
       </View>
     </View>
   );
