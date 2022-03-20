@@ -3,11 +3,12 @@ import {View, Text, TextInput} from 'react-native';
 import {useTailwind} from 'tailwind-rn';
 
 import {useNavigation} from '@react-navigation/native';
+import {gql, useMutation} from '@apollo/client';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import type {RootStackParamList} from '../App';
 
 import FpButton from '../components/Button';
-import {gql, useMutation} from '@apollo/client';
+import BackButton from '../components/BackButton';
 
 type GetStartedNavigationProps = NativeStackNavigationProp<
   RootStackParamList,
@@ -26,7 +27,7 @@ const SignUp = () => {
   const tailwind = useTailwind();
   const [signUp, {}] = useMutation(SIGNUP);
 
-  const onPress = () => {
+  const OtpPage = () => {
     navigation.navigate('OtpPage');
     signUp({
       variables: {
@@ -37,9 +38,16 @@ const SignUp = () => {
     });
   };
 
+  const GetStartedPage = () => {
+    navigation.navigate('GetStartedPage');
+  };
+
   return (
     <View style={tailwind('bg-primary h-full')}>
-      <View style={tailwind('flex justify-center ml-4 mt-40 relative')}>
+      <View style={tailwind('p-2 m-2')}>
+        <BackButton onPress={GetStartedPage} />
+      </View>
+      <View style={tailwind('flex justify-center ml-4 mt-36 relative')}>
         <Text style={tailwind('text-white font-mon-light text-4xl mb-1')}>
           welcome to
         </Text>
@@ -79,7 +87,7 @@ const SignUp = () => {
         </Text>
       </View>
       <View style={tailwind('mb-6')}>
-        <FpButton title="Login" className="mx-4" onPress={onPress} />
+        <FpButton title="Login" className="mx-4" onPress={OtpPage} />
       </View>
     </View>
   );

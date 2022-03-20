@@ -7,6 +7,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import type {RootStackParamList} from '../App';
 
 import FpButton from '../components/Button';
+import BackButton from '../components/BackButton';
 
 type GetStartedNavigationProps = NativeStackNavigationProp<
   RootStackParamList,
@@ -17,9 +18,16 @@ const OtpPage = () => {
   const navigation = useNavigation<GetStartedNavigationProps>();
   const tailwind = useTailwind();
 
+  const SignUp = () => {
+    navigation.navigate('SignUp');
+  };
+
   return (
     <View style={tailwind('bg-primary h-full')}>
-      <View style={tailwind('flex items-center mt-6')}>
+      <View style={tailwind('p-2 m-2')}>
+        <BackButton onPress={SignUp} />
+      </View>
+      <View style={tailwind('flex items-center -mt-12')}>
         <Text
           style={tailwind('text-white font-mon-bold text-xl tracking-wider')}>
           firstpich
