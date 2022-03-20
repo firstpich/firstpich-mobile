@@ -14,7 +14,7 @@ const BackButton: React.FC<BackButtonProps> = ({onPress = () => {}}) => {
     <TouchableOpacity
       onPress={onPress}
       style={tailwind(
-        'flex items-center justify-center bg-primary-color-60 w-9 h-9 ml-16 rounded-full',
+        'flex items-center justify-center bg-primary-color-60 w-9 h-9 rounded-full',
       )}>
       <Icon
         name="ri-arrow-left-s-line"
