@@ -27,7 +27,7 @@ const SignUp = () => {
   const tailwind = useTailwind();
   const [signUp, {}] = useMutation(SIGNUP);
 
-  const OtpPage = () => {
+  const onPressLoginButton = () => {
     navigation.navigate('OtpPage');
     signUp({
       variables: {
@@ -87,7 +87,7 @@ const SignUp = () => {
         </Text>
       </View>
       <View style={tailwind('mb-6')}>
-        <FpButton title="Login" className="mx-4" onPress={OtpPage} />
+        <FpButton title="Login" className="mx-4" onPress={onPressLoginButton} />
       </View>
     </View>
   );
