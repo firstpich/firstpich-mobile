@@ -44,11 +44,16 @@ const OtpPage = () => {
 
   const [otp, setOtp] = useState<string>('');
 
-  const [login, {error, loading}] = useMutation(LOGIN, {
+  const [login, {data, error, loading}] = useMutation(LOGIN, {
     errorPolicy: 'all',
   });
 
-  const thereIsError = (error && error.graphQLErrors.length !== 0) || false;
+  const otpRequestFailed = (data && data.login.loggedIn === false) || false;
+  const thereIsGraphQLError =
+    (error && error.graphQLErrors.length !== 0) || false;
+  const thereIsNetworkError = (error && error.networkError) || false;
+  const thereIsError =
+    otpRequestFailed || thereIsNetworkError || thereIsGraphQLError;
 
   const onPressEnterOTP = () => {
     login({
@@ -58,9 +63,9 @@ const OtpPage = () => {
           otp,
         },
       },
-    }).then(({errors}) => {
-      console.log(JSON.stringify(errors));
-      if (!errors) {
+      // eslint-disable-next-line @typescript-eslint/no-shadow
+    }).then(({data, errors}) => {
+      if (!errors && data.login.loggedIn === true) {
         navigation.navigate('AboutYouPage');
       }
     });

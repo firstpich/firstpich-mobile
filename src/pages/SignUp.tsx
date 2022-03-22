@@ -30,7 +30,10 @@ const SignUp = () => {
     errorPolicy: 'all',
   });
 
-  const thereIsError = (error && error.graphQLErrors.length !== 0) || false;
+  const thereIsGraphQLError =
+    (error && error.graphQLErrors.length !== 0) || false;
+  const thereIsNetworkError = (error && error.networkError) || false;
+  const thereIsError = thereIsNetworkError || thereIsGraphQLError;
 
   const onPressLoginButton = () => {
     signUp({
