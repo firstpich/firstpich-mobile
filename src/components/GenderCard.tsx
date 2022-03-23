@@ -4,13 +4,15 @@ import {useTailwind} from 'tailwind-rn';
 
 type GenderCardProps = {
   genderType: string;
-  className?: string;
+  boxColor?: string;
+  textColor?: string;
   onPress?: (() => void) | undefined;
 };
 
 const GenderCard: React.FC<GenderCardProps> = ({
   genderType,
-  className = '',
+  textColor = '',
+  boxColor = '',
   onPress = () => {},
 }) => {
   const tailwind = useTailwind();
@@ -18,10 +20,10 @@ const GenderCard: React.FC<GenderCardProps> = ({
     <TouchableOpacity onPress={onPress}>
       <View
         style={tailwind(
-          'flex bg-white p-3 rounded-sm justify-center items-center ' +
-            className,
+          'flex w-28 h-24 rounded-lg justify-center items-center mr-5 ' +
+            boxColor,
         )}>
-        <Text style={tailwind('text-black font-bold text-lg')}>
+        <Text style={tailwind('font-mon-medium text-2xl ' + textColor)}>
           {genderType}
         </Text>
       </View>

@@ -38,7 +38,26 @@ const AboutYouPage = () => {
         <Text style={tailwind('text-white text-lg font-mon-medium mb-4 mt-8')}>
           How do you identify?
         </Text>
-        <GenderCard genderType="Male" />
+        <View style={tailwind('flex flex-row')}>
+          <GenderCard
+            genderType="Male"
+            boxColor="bg-primary-color-10"
+            textColor="text-2xl"
+          />
+          <GenderCard
+            genderType="Female"
+            boxColor="bg-primary-color-10"
+            textColor="text-2xl"
+          />
+          <GenderCard
+            genderType="Others"
+            boxColor="bg-primary-color-10"
+            textColor="text-2xl"
+          />
+        </View>
+        <Text style={tailwind('text-white text-lg font-mon-medium mb-4 mt-8')}>
+          What genre do you like to read?
+        </Text>
       </View>
       <View style={tailwind('absolute w-full bottom-6')}>
         <FpButton
