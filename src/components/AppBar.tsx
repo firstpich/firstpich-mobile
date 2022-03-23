@@ -8,7 +8,6 @@ type ButtonProps = {
   title?: string;
   className?: string;
   onPress?: (() => void) | undefined;
-  disabled?: boolean;
 };
 
 const AppBar: React.FC<ButtonProps> = ({
@@ -18,13 +17,12 @@ const AppBar: React.FC<ButtonProps> = ({
 }) => {
   const tailwind = useTailwind();
   return (
-    <View style={tailwind('flex justify-center flex-col')}>
+    <View style={tailwind('flex justify-center flex-col' + className)}>
       <View style={tailwind('p-2 m-2')}>
         <TouchableOpacity
           onPress={onPress}
           style={tailwind(
-            'flex items-center justify-center bg-primary-color-60 w-9 h-9 rounded-full' +
-              className,
+            'flex items-center justify-center bg-primary-color-60 w-9 h-9 rounded-full',
           )}>
           <Icon
             name="ri-arrow-left-s-line"
