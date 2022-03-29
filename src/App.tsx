@@ -17,7 +17,8 @@ import IntroPage from "./pages/IntroPage";
 import GetStartedPage from "./pages/GetStartedPage";
 import SignUp from "./pages/SignUp";
 import OtpPage, { OtpPageParams } from "./pages/OtpPage";
-import AboutYouPage from "./pages/AboutYouPage";
+import AboutYouPage, { AboutYouPageParams } from "./pages/AboutYouPage";
+import HomePage from "./pages/Home";
 
 import utilities from "../tailwind.json";
 
@@ -26,7 +27,8 @@ export type RootStackParamList = {
   GetStartedPage: undefined;
   SignUp: undefined;
   OtpPage: OtpPageParams;
-  AboutYouPage: undefined;
+  AboutYouPage: AboutYouPageParams;
+  Home: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -82,6 +84,13 @@ export default function App() {
                 cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
               }}
               component={AboutYouPage}
+            />
+            <Stack.Screen
+              name="Home"
+              options={{
+                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+              }}
+              component={HomePage}
             />
           </Stack.Navigator>
           {/* <AboutYouPage /> */}

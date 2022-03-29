@@ -68,7 +68,12 @@ const OtpPage = () => {
       if (!errors && data.login.loggedIn === true) {
         navigation.reset({
           index: 0,
-          routes: [{ name: "AboutYouPage" }],
+          routes: [
+            {
+              name: "AboutYouPage",
+              params: { nonOnboardedToken: data.login.nonOnboardedToken },
+            },
+          ],
         });
       }
     });
