@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { useTailwind } from 'tailwind-rn';
+import {View, Text, TouchableOpacity} from 'react-native';
+import {useTailwind} from 'tailwind-rn';
 
 type GenderCardProps = {
   genre: string;
@@ -11,7 +11,7 @@ type GenderCardProps = {
 
 const GenreCard: React.FC<GenderCardProps> = ({
   genre,
-  onPress = () => { },
+  onPress = () => {},
   selected,
   className = '',
 }) => {
