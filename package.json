@@ -7,12 +7,16 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint --ext .tsx --ext .ts src/",
     "build:tailwind": "tailwindcss --input input.css --output tailwind.css --no-autoprefixer && tailwind-rn",
     "dev:tailwind": "concurrently \"tailwindcss --input input.css --output tailwind.css --no-autoprefixer --watch\" \"tailwind-rn --watch\"",
     "dev:runall": "concurrently \"yarn start\" \"yarn dev:tailwind\" \"yarn android\"",
     "postinstall": "npm run build:tailwind && if which pod > /dev/null; then (cd ios; pod install); fi",
-    "kill": "kill $(lsof -t -i:8081)"
+    "kill": "kill $(lsof -t -i:8081)",
+    "eslint-check": "eslint \"{src,test}/**/*.tsx\"",
+    "eslint-fix": "eslint \"{src,test}/**/*.tsx\" --fix",
+    "format": "prettier --check ./src",
+    "write": "npx prettier --write ./src"
   },
   "dependencies": {
     "@apollo/client": "^3.5.10",
@@ -45,16 +49,22 @@
     "@types/react-native": "^0.66.4",
     "@types/react-native-snap-carousel": "^3.8.5",
     "@types/react-test-renderer": "^17.0.1",
-    "@typescript-eslint/eslint-plugin": "^5.7.0",
-    "@typescript-eslint/parser": "^5.7.0",
+    "@typescript-eslint/eslint-plugin": "^5.17.0",
+    "@typescript-eslint/parser": "^5.17.0",
     "apollo-codegen": "^0.20.2",
     "babel-jest": "^26.6.3",
     "concurrently": "^7.0.0",
     "detox": "^19.4.1",
     "eslint": "^7.14.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "husky": "^7.0.4",
     "jest": "^27.4.7",
+    "lint-staged": "^12.3.7",
     "metro-react-native-babel-preset": "^0.66.2",
     "postcss": "^8.4.6",
+    "prettier": "^2.6.1",
     "react-native-svg-transformer": "^1.0.0",
     "react-test-renderer": "17.0.2",
     "tailwindcss": "^3.0.22",
@@ -73,5 +83,18 @@
       "json",
       "node"
     ]
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "eslint --ext .tsx --ext .ts src/ --fix"
+    ],
+    "./src/**": [
+      "prettier --write ."
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }

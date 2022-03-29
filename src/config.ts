@@ -1,1 +1,1 @@
-export const BACKEND_URI = 'http://api.firstpich.com/graphql';
+export const BACKEND_URI = "http://api.firstpich.com/graphql";

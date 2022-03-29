@@ -1,25 +1,25 @@
-import React, {useEffect} from 'react';
-import {TailwindProvider} from 'tailwind-rn';
+import React, { useEffect } from "react";
+import { TailwindProvider } from "tailwind-rn";
 
-import {NavigationContainer} from '@react-navigation/native';
+import { NavigationContainer } from "@react-navigation/native";
 import {
   CardStyleInterpolators,
   createStackNavigator,
-} from '@react-navigation/stack';
+} from "@react-navigation/stack";
 
-import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
-import SplashScreen from 'react-native-splash-screen';
+import SplashScreen from "react-native-splash-screen";
 
-import {BACKEND_URI} from './config';
+import { BACKEND_URI } from "./config";
 
-import IntroPage from './pages/IntroPage';
-import GetStartedPage from './pages/GetStartedPage';
-import SignUp from './pages/SignUp';
-import OtpPage, {OtpPageParams} from './pages/OtpPage';
-import AboutYouPage from './pages/AboutYouPage';
+import IntroPage from "./pages/IntroPage";
+import GetStartedPage from "./pages/GetStartedPage";
+import SignUp from "./pages/SignUp";
+import OtpPage, { OtpPageParams } from "./pages/OtpPage";
+import AboutYouPage from "./pages/AboutYouPage";
 
-import utilities from '../tailwind.json';
+import utilities from "../tailwind.json";
 
 export type RootStackParamList = {
   IntroPage: undefined;
@@ -46,7 +46,7 @@ export default function App() {
       <TailwindProvider utilities={utilities}>
         <NavigationContainer>
           <Stack.Navigator
-            screenOptions={{headerShown: false}}
+            screenOptions={{ headerShown: false }}
             initialRouteName="IntroPage">
             <Stack.Screen
               name="IntroPage"
