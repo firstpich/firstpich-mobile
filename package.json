@@ -39,6 +39,7 @@
     "@react-native-community/eslint-config": "^2.0.0",
     "@svgr/cli": "^6.2.1",
     "@tailwindcss/typography": "^0.5.2",
+    "@types/": "react-navigation/native",
     "@types/jest": "^26.0.23",
     "@types/node": "12",
     "@types/react-native": "^0.66.4",

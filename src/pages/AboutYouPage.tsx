@@ -9,6 +9,7 @@ import type {RootStackParamList} from '../App';
 import FpButton from '../components/Button';
 import AppBar from '../components/AppBar';
 import GenderCard from '../components/GenderCard';
+import GenreCard from '../components/GenreCard';
 
 type GetStartedNavigationProps = StackNavigationProp<
   RootStackParamList,
@@ -21,7 +22,7 @@ const AboutYouPage = () => {
 
   return (
     <View style={tailwind('bg-primary h-full')}>
-      <AppBar onPress={() => navigation.navigate('SignUp')} />
+      <AppBar onPress={() => navigation.pop()} />
       <View style={tailwind('flex items-start py-12 ml-5')}>
         <Text style={tailwind('text-white text-4xl font-mon-bold mb-4')}>
           About You
@@ -58,6 +59,13 @@ const AboutYouPage = () => {
         <Text style={tailwind('text-white text-lg font-mon-medium mb-4 mt-8')}>
           What genre do you like to read?
         </Text>
+        <View style={tailwind('flex flex-row')}>
+          <GenreCard genderType="Fiction" />
+          <GenreCard genderType="Romance" />
+          <GenreCard genderType="Folklore" />
+          <GenreCard genderType="Fan-Fiction" />
+          <GenreCard genderType="Horror" />
+        </View>
       </View>
       <View style={tailwind('absolute w-full bottom-6')}>
         <FpButton
