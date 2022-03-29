@@ -16,7 +16,7 @@
     "eslint-check": "eslint \"{src,test}/**/*.tsx\"",
     "eslint-fix": "eslint \"{src,test}/**/*.tsx\" --fix",
     "format": "prettier --check ./src",
-    "write": "npx prettier --write ./src"
+    "write": "prettier --write ./src"
   },
   "dependencies": {
     "@apollo/client": "^3.5.10",
