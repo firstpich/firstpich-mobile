@@ -84,6 +84,7 @@ export default function App() {
               component={AboutYouPage}
             />
           </Stack.Navigator>
+          {/* <AboutYouPage /> */}
         </NavigationContainer>
       </TailwindProvider>
     </ApolloProvider>

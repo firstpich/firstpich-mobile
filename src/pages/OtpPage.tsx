@@ -66,7 +66,10 @@ const OtpPage = () => {
       // eslint-disable-next-line @typescript-eslint/no-shadow
     }).then(({data, errors}) => {
       if (!errors && data.login.loggedIn === true) {
-        navigation.navigate('AboutYouPage');
+        navigation.reset({
+          index: 0,
+          routes: [{name: 'AboutYouPage'}],
+        });
       }
     });
   };
