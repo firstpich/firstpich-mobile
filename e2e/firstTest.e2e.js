@@ -1,4 +1,4 @@
-describe('Example', () => {
+describe("Example", () => {
   beforeAll(async () => {
     await device.launchApp();
   });
@@ -7,10 +7,10 @@ describe('Example', () => {
     await device.reloadReactNative();
   });
 
-  it('should have step one shown', async () => {
-    await waitFor(element(by.id('MyUniqueId123')))
+  it("should have step one shown", async () => {
+    await waitFor(element(by.id("MyUniqueId123")))
       .toBeVisible()
       .withTimeout(5000);
-    await expect(element(by.id('MyUniqueId123'))).toBeVisible();
+    await expect(element(by.id("MyUniqueId123"))).toBeVisible();
   });
 });

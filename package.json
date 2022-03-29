@@ -12,7 +12,9 @@
     "dev:tailwind": "concurrently \"tailwindcss --input input.css --output tailwind.css --no-autoprefixer --watch\" \"tailwind-rn --watch\"",
     "dev:runall": "concurrently \"yarn start\" \"yarn dev:tailwind\" \"yarn android\"",
     "postinstall": "npm run build:tailwind && if which pod > /dev/null; then (cd ios; pod install); fi",
-    "kill": "kill $(lsof -t -i:8081)"
+    "kill": "kill $(lsof -t -i:8081)",
+    "eslint-check": "eslint \"{src,test}/**/*.tsx\"",
+    "eslint-fix": "eslint \"{src,test}/**/*.tsx\" --fix"
   },
   "dependencies": {
     "@apollo/client": "^3.5.10",

@@ -1,14 +1,14 @@
-declare module '*.svg' {
+declare module "*.svg" {
   const content: any;
   export default content;
 }
 
-declare module '*.png' {
+declare module "*.png" {
   const content: any;
   export default content;
 }
 
-declare module 'react-native-remix-icon' {
+declare module "react-native-remix-icon" {
   const Icon: any;
   export default Icon;
 }

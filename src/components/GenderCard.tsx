@@ -1,6 +1,6 @@
-import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { useTailwind } from 'tailwind-rn';
+import React from "react";
+import { View, Text, TouchableOpacity } from "react-native";
+import { useTailwind } from "tailwind-rn";
 
 type GenderCardProps = {
   genderType: string;
@@ -11,8 +11,8 @@ type GenderCardProps = {
 
 const GenderCard: React.FC<GenderCardProps> = ({
   genderType,
-  onPress = () => { },
-  className = '',
+  onPress = () => {},
+  className = "",
   selected,
 }) => {
   const tailwind = useTailwind();
@@ -21,11 +21,11 @@ const GenderCard: React.FC<GenderCardProps> = ({
       <View
         style={tailwind(
           `flex w-28 h-24 rounded-lg justify-center items-center ${className} 
-          ${selected ? 'bg-primary-color-10' : 'bg-primary-color-80'}`,
+          ${selected ? "bg-primary-color-10" : "bg-primary-color-80"}`,
         )}>
         <Text
           style={tailwind(`font-mon-medium text-xl
-          ${selected ? 'text-white' : 'text-primary-color-10'}`)}>
+          ${selected ? "text-white" : "text-primary-color-10"}`)}>
           {genderType}
         </Text>
       </View>
