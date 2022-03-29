@@ -3,7 +3,7 @@ import {View, Text, ImageBackground, Dimensions} from 'react-native';
 import {useTailwind} from 'tailwind-rn';
 
 import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {StackNavigationProp} from '@react-navigation/stack';
 import type {RootStackParamList} from '../App';
 
 import Carousel, {Pagination} from 'react-native-snap-carousel';
@@ -12,7 +12,7 @@ import FpLogo from '../../assets/icons/fpLogo.svg';
 import BgShade from '../../assets/icons/bgShade.png';
 import FpButton from '../components/Button';
 
-type IntroPageNavigationProps = NativeStackNavigationProp<
+type IntroPageNavigationProps = StackNavigationProp<
   RootStackParamList,
   'IntroPage'
 >;
