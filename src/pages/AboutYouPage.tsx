@@ -50,7 +50,7 @@ const AboutYouPage = () => {
           keyboardType="default"
           autoComplete="name"
           style={tailwind(
-            "bg-input-fields-bg rounded-md w-96 text-white p-3 text-base mx-5",
+            "bg-input-fields-bg rounded-md w-96 text-white p-3 text-lg mx-5",
           )}
         />
         <Text
