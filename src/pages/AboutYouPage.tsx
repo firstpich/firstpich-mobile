@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { View, TextInput, Text, FlatList } from 'react-native';
-import { useTailwind } from 'tailwind-rn';
+import React, {useState} from 'react';
+import {View, TextInput, Text, FlatList} from 'react-native';
+import {useTailwind} from 'tailwind-rn';
 
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import type { RootStackParamList } from '../App';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import type {RootStackParamList} from '../App';
 
 import FpButton from '../components/Button';
 import AppBar from '../components/AppBar';
@@ -53,14 +53,15 @@ const AboutYouPage = () => {
             'bg-input-fields-bg rounded-md w-96 text-white p-3 text-base mx-5',
           )}
         />
-        <Text style={tailwind('text-white text-lg font-mon-medium mb-4 mt-8 mx-6')}>
+        <Text
+          style={tailwind('text-white text-lg font-mon-medium mb-4 mt-8 mx-6')}>
           How do you identify?
         </Text>
         <View style={tailwind('flex flex-row mx-5')}>
           <FlatList
             data={possibleGenders}
             horizontal
-            renderItem={({ item, index }) => (
+            renderItem={({item, index}) => (
               <GenderCard
                 className={index === possibleGenders.length - 1 ? '' : 'mr-6'}
                 genderType={item}
@@ -70,7 +71,8 @@ const AboutYouPage = () => {
             )}
           />
         </View>
-        <Text style={tailwind('text-white text-lg font-mon-medium mb-4 mt-8 ml-6')}>
+        <Text
+          style={tailwind('text-white text-lg font-mon-medium mb-4 mt-8 ml-6')}>
           What genre do you like to read?
         </Text>
         <View style={tailwind('flex flex-col')}>
@@ -78,7 +80,7 @@ const AboutYouPage = () => {
             <FlatList
               data={possibleGenres.slice(0, possibleGenres.length / 2)}
               horizontal
-              renderItem={({ item, index }) => (
+              renderItem={({item, index}) => (
                 <GenreCard
                   genre={item}
                   selected={genres.includes(item)}
@@ -89,8 +91,9 @@ const AboutYouPage = () => {
                       setGenres(g => [...g, item]);
                     }
                   }}
-                  className={`${index === possibleGenres.length / 2 - 1 ? 'mr-5' : 'mr-4'
-                    }
+                  className={`${
+                    index === possibleGenres.length / 2 - 1 ? 'mr-5' : 'mr-4'
+                  }
                   ${index === 0 ? 'ml-5' : ''}`}
                 />
               )}
@@ -100,7 +103,7 @@ const AboutYouPage = () => {
             <FlatList
               data={possibleGenres.slice(possibleGenres.length / 2)}
               horizontal
-              renderItem={({ item, index }) => (
+              renderItem={({item, index}) => (
                 <GenreCard
                   genre={item}
                   selected={genres.includes(item)}
@@ -111,8 +114,9 @@ const AboutYouPage = () => {
                       setGenres(g => [...g, item]);
                     }
                   }}
-                  className={`${index === possibleGenres.length / 2 - 1 ? 'mr-5' : 'mr-4'
-                    }
+                  className={`${
+                    index === possibleGenres.length / 2 - 1 ? 'mr-5' : 'mr-4'
+                  }
                   ${index === 0 ? 'ml-5' : ''}`}
                 />
               )}

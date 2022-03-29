@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { useTailwind } from 'tailwind-rn';
+import {View, Text, TouchableOpacity} from 'react-native';
+import {useTailwind} from 'tailwind-rn';
 
 import Icon from 'react-native-remix-icon';
 
@@ -14,12 +14,15 @@ type ButtonProps = {
 const AppBar: React.FC<ButtonProps> = ({
   title = 'firstpich',
   className = '',
-  onPress = () => { },
+  onPress = () => {},
   showBack = true,
 }) => {
   const tailwind = useTailwind();
   return (
-    <View style={tailwind('p-2 m-2 flex flex-row items-center justify-center ' + className)}>
+    <View
+      style={tailwind(
+        'p-2 m-2 flex flex-row items-center justify-center ' + className,
+      )}>
       {showBack && (
         <TouchableOpacity
           onPress={onPress}
