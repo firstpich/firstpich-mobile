@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { View, Text, ImageBackground, Dimensions } from "react-native";
 import { useTailwind } from "tailwind-rn";
+import Carousel, { Pagination } from "react-native-snap-carousel";
 
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import type { RootStackParamList } from "../App";
 
-import Carousel, { Pagination } from "react-native-snap-carousel";
+import type { RootStackParamList } from "../routes";
 
 import FpLogo from "../../assets/icons/fpLogo.svg";
 import BgShade from "../../assets/icons/bgShade.png";

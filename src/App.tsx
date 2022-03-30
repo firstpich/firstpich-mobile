@@ -1,11 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, createContext, useState } from "react";
 import { TailwindProvider } from "tailwind-rn";
-
-import { NavigationContainer } from "@react-navigation/native";
-import {
-  CardStyleInterpolators,
-  createStackNavigator,
-} from "@react-navigation/stack";
 
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
@@ -13,88 +7,31 @@ import SplashScreen from "react-native-splash-screen";
 
 import { BACKEND_URI } from "./config";
 
-import IntroPage from "./pages/IntroPage";
-import GetStartedPage from "./pages/GetStartedPage";
-import SignUp from "./pages/SignUp";
-import OtpPage, { OtpPageParams } from "./pages/OtpPage";
-import AboutYouPage, { AboutYouPageParams } from "./pages/AboutYouPage";
-import HomePage from "./pages/Home";
-
 import utilities from "../tailwind.json";
-
-export type RootStackParamList = {
-  IntroPage: undefined;
-  GetStartedPage: undefined;
-  SignUp: undefined;
-  OtpPage: OtpPageParams;
-  AboutYouPage: AboutYouPageParams;
-  Home: undefined;
-};
-
-const Stack = createStackNavigator<RootStackParamList>();
+import Routing from "./routes";
 
 const client = new ApolloClient({
   uri: BACKEND_URI,
   cache: new InMemoryCache(),
 });
 
+export const LoginContext = createContext<boolean>(false);
+
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+
   useEffect(() => {
+    // Fetch Is LoggedIn / Database Check / Get Access Token
+    setIsLoggedIn(false);
     SplashScreen.hide();
-  }, []);
+  }, [setIsLoggedIn]);
 
   return (
     <ApolloProvider client={client}>
       <TailwindProvider utilities={utilities}>
-        <NavigationContainer>
-          <Stack.Navigator
-            screenOptions={{ headerShown: false }}
-            initialRouteName="IntroPage">
-            <Stack.Screen
-              name="IntroPage"
-              options={{
-                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-              }}
-              component={IntroPage}
-            />
-            <Stack.Screen
-              name="GetStartedPage"
-              options={{
-                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-              }}
-              component={GetStartedPage}
-            />
-            <Stack.Screen
-              name="SignUp"
-              options={{
-                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-              }}
-              component={SignUp}
-            />
-            <Stack.Screen
-              name="OtpPage"
-              options={{
-                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-              }}
-              component={OtpPage}
-            />
-            <Stack.Screen
-              name="AboutYouPage"
-              options={{
-                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-              }}
-              component={AboutYouPage}
-            />
-            <Stack.Screen
-              name="Home"
-              options={{
-                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-              }}
-              component={HomePage}
-            />
-          </Stack.Navigator>
-          {/* <AboutYouPage /> */}
-        </NavigationContainer>
+        <LoginContext.Provider value={isLoggedIn}>
+          <Routing />
+        </LoginContext.Provider>
       </TailwindProvider>
     </ApolloProvider>
   );

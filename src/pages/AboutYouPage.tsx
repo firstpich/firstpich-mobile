@@ -2,15 +2,17 @@ import React, { useCallback, useState } from "react";
 import { View, TextInput, Text, FlatList } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
+import { gql, useMutation, useQuery } from "@apollo/client";
+
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import type { RootStackParamList } from "../App";
+
+import type { RootStackParamList } from "../routes";
 
 import FpButton from "../components/Button";
 import AppBar from "../components/AppBar";
 import GenderCard from "../components/GenderCard";
 import GenreCard from "../components/GenreCard";
-import { gql, useMutation, useQuery } from "@apollo/client";
 
 const possibleGenders = ["Male", "Female", "Others"];
 
