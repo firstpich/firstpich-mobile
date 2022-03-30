@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
+import { gql, useMutation } from "@apollo/client";
+
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import type { RootStackParamList } from "../App";
+
+import type { RootStackParamList } from "../routes";
 
 import FpButton from "../components/Button";
 import BackButton from "../components/BackButton";
-import { gql, useMutation } from "@apollo/client";
 
 export type OtpPageParams = {
   phone: string;

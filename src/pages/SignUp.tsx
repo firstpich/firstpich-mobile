@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { View, Text, TextInput } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
-import { useNavigation } from "@react-navigation/native";
 import { gql, useMutation } from "@apollo/client";
+
+import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import type { RootStackParamList } from "../App";
+
+import type { RootStackParamList } from "../routes";
 
 import FpButton from "../components/Button";
 import BackButton from "../components/BackButton";
