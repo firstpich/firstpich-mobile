@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { View, TextInput, Text, FlatList } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
@@ -13,6 +13,9 @@ import FpButton from "../components/Button";
 import AppBar from "../components/AppBar";
 import GenderCard from "../components/GenderCard";
 import GenreCard from "../components/GenreCard";
+
+import { database } from "../db";
+import { LoginContext } from "../App";
 
 const possibleGenders = ["Male", "Female", "Others"];
 
@@ -96,6 +99,8 @@ const AboutYouPage = () => {
     errorPolicy: "all",
   });
 
+  const { setIsLoggedIn } = useContext(LoginContext);
+
   const onPressOnboard = useCallback(() => {
     const err: ErrorTypes = {
       name: null,
@@ -145,8 +150,13 @@ const AboutYouPage = () => {
         },
         nonOnboardedToken,
       },
-    }).then(({ errors: onboardingErrors }) => {
+    }).then(async ({ data, errors: onboardingErrors }) => {
       if (!onboardingErrors) {
+        await database.adapter.setLocal(
+          "refresh_token",
+          data.onboard.tokens.refreshToken,
+        );
+        setIsLoggedIn(true);
         navigation.reset({
           index: 0,
           routes: [{ name: "Home" }],
@@ -162,6 +172,7 @@ const AboutYouPage = () => {
     navigation,
     onboard,
     setError,
+    setIsLoggedIn,
   ]);
 
   return (

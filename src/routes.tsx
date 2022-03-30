@@ -31,7 +31,7 @@ export type RootStackParamList = {
 const Stack = createStackNavigator<RootStackParamList>();
 
 const Routing = () => {
-  const isLoggedIn = useContext(LoginContext);
+  const { isLoggedIn } = useContext(LoginContext);
 
   return (
     <NavigationContainer>
