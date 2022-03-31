@@ -7,11 +7,13 @@ import { StackNavigationProp } from "@react-navigation/stack";
 
 import type { RootStackParamList } from "../../routes";
 
-import FpLogo from "../../../assets/icons/fpLogo.svg";
+// Assets
 import BgShade from "../../../assets/icons/bgShade.png";
 
+// Components
 import NextButton from "../../components/common/Button";
 import CarouselCard from "../../components/screens/onboarding/intro-screen-components/CarouselCard";
+import FirstPichLogoText from "../../components/screens/onboarding/intro-screen-components/FirstPichLogoText";
 
 type IntroPageNavigationProps = StackNavigationProp<
   RootStackParamList,
@@ -26,12 +28,7 @@ const IntroPage = () => {
     <View style={tailwind("bg-primary h-full")}>
       <ImageBackground source={BgShade} imageStyle={tailwind("opacity-30")}>
         <View style={tailwind("flex flex-col justify-center h-full")}>
-          <View style={tailwind("flex flex-row items-center pl-3 -mt-20")}>
-            <FpLogo width={38} height={38} />
-            <Text style={tailwind("ml-3 text-white font-mon-bold text-3xl")}>
-              firstpich
-            </Text>
-          </View>
+          <FirstPichLogoText />
           <View style={tailwind("mt-32")}>
             <CarouselCard />
           </View>
