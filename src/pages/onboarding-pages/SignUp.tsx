@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TextInput } from "react-native";
+import { View, Text } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
 import { gql, useMutation } from "@apollo/client";
@@ -11,6 +11,7 @@ import type { RootStackParamList } from "../../routes";
 
 import FpButton from "../../components/common/Button";
 import BackButton from "../../components/common/BackButton";
+import NumberInputField from "../../components/screens/onboarding/signup-screen-components/NumberInputField";
 
 type GetStartedNavigationProps = StackNavigationProp<
   RootStackParamList,
@@ -24,18 +25,13 @@ const SIGNUP = gql`
 `;
 
 const SignUp = () => {
+  const tailwind = useTailwind();
   const navigation = useNavigation<GetStartedNavigationProps>();
   const [mobileNumber, setMobileNumber] = useState<string>("");
-  const tailwind = useTailwind();
 
   const [signUp, { error, loading }] = useMutation(SIGNUP, {
     errorPolicy: "all",
   });
-
-  const thereIsGraphQLError =
-    (error && error.graphQLErrors.length !== 0) || false;
-  const thereIsNetworkError = (error && error.networkError) || false;
-  const thereIsError = thereIsNetworkError || thereIsGraphQLError;
 
   const onPressLoginButton = () => {
     signUp({
@@ -70,37 +66,8 @@ const SignUp = () => {
         </Text>
       </View>
 
-      <View style={tailwind("flex justify-center ml-4 py-12")}>
-        <View>
-          <Text
-            style={tailwind(
-              "text-white font-mon-semibold absolute z-10 h-12 mt-4 ml-2 pt-px",
-            )}>
-            +91
-          </Text>
-          <TextInput
-            placeholder="Mobile Number"
-            placeholderTextColor="#FFFFFF"
-            keyboardType="number-pad"
-            maxLength={10}
-            autoComplete="tel"
-            onChangeText={text => setMobileNumber(text)}
-            value={mobileNumber}
-            style={tailwind(
-              "bg-input-fields-bg rounded-md w-11/12 text-white p-3 pl-10 text-base " +
-                (thereIsError ? "border-red-500 border" : ""),
-            )}
-          />
-        </View>
-        {thereIsError && (
-          <Text style={tailwind("mt-2 text-red-500 ml-0.5 text-xs")}>
-            Entered phone number looks invalid
-          </Text>
-        )}
-        <Text style={tailwind("mt-2 text-white ml-0.5 text-xs")}>
-          You will recieve an OTP on the above number
-        </Text>
-      </View>
+      <NumberInputField signUpStateSetter={setMobileNumber} />
+
       <View style={tailwind("mb-6")}>
         <FpButton
           title="Login"

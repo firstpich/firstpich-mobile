@@ -6,7 +6,7 @@ import Carousel, { Pagination } from "react-native-snap-carousel";
 
 const carouselWords = [
   "Create audiobook right from your hand and earn.",
-  "Grab the reader’s interest with the first sentence.",
+  "Grab the reader’s interest with your first sentence.",
   "Make art with your voice that is heard by millions",
   "Hear what your ears love from the best.",
 ];
