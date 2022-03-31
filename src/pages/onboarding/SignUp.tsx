@@ -12,6 +12,7 @@ import type { RootStackParamList } from "../../routes";
 import FpButton from "../../components/common/Button";
 import BackButton from "../../components/common/BackButton";
 import PhoneNumberInputField from "../../components/onboarding/signup-screen/PhoneNumberInputField";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 type GetStartedNavigationProps = StackNavigationProp<
   RootStackParamList,
@@ -53,7 +54,7 @@ const SignUp = () => {
   };
 
   return (
-    <View style={tailwind("bg-primary h-full")}>
+    <SafeAreaView style={tailwind("bg-primary h-full")}>
       <View style={tailwind("p-2 m-2")}>
         <BackButton onPress={() => navigation.pop()} />
       </View>
@@ -85,7 +86,7 @@ const SignUp = () => {
           onPress={onPressLoginButton}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

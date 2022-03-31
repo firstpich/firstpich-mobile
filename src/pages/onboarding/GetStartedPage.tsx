@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, ImageBackground } from "react-native";
+import { View, Text, ImageBackground, SafeAreaView } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
 import { useNavigation } from "@react-navigation/native";
@@ -20,7 +20,7 @@ const GetStartedPage = () => {
   const tailwind = useTailwind();
 
   return (
-    <View style={tailwind("bg-primary h-full")}>
+    <SafeAreaView style={tailwind("bg-primary h-full")}>
       <ImageBackground source={GetStartedBg}>
         <View style={tailwind("flex flex-col justify-center h-full")}>
           <View
@@ -46,7 +46,7 @@ const GetStartedPage = () => {
           />
         </View>
       </ImageBackground>
-    </View>
+    </SafeAreaView>
   );
 };
 

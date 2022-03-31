@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  SafeAreaView,
+} from "react-native";
 import { useTailwind } from "tailwind-rn";
 
 import { gql, useMutation } from "@apollo/client";
@@ -86,7 +92,7 @@ const OtpPage = () => {
   };
 
   return (
-    <View style={tailwind("bg-primary h-full")}>
+    <SafeAreaView style={tailwind("bg-primary h-full")}>
       <View style={tailwind("p-2 m-2")}>
         <BackButton onPress={SignUp} />
       </View>
@@ -144,7 +150,7 @@ const OtpPage = () => {
           <Text style={tailwind("font-mon-bold text-white")}>Resend OTP</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

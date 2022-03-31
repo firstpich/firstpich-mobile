@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, Text, ImageBackground } from "react-native";
+import React from "react";
+import { View, ImageBackground, SafeAreaView } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
 import { useNavigation } from "@react-navigation/native";
@@ -25,7 +25,7 @@ const IntroPage = () => {
   const tailwind = useTailwind();
 
   return (
-    <View style={tailwind("bg-primary h-full")}>
+    <SafeAreaView style={tailwind("bg-primary h-full")}>
       <ImageBackground source={BgShade} imageStyle={tailwind("opacity-30")}>
         <View style={tailwind("flex flex-col justify-center h-full")}>
           <FirstPichLogoText />
@@ -41,7 +41,7 @@ const IntroPage = () => {
           />
         </View>
       </ImageBackground>
-    </View>
+    </SafeAreaView>
   );
 };
 

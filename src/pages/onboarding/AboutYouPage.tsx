@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useState } from "react";
-import { View, TextInput, Text, FlatList } from "react-native";
+import { View, TextInput, Text, FlatList, SafeAreaView } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
 import { gql, useMutation, useQuery } from "@apollo/client";
@@ -176,7 +176,7 @@ const AboutYouPage = () => {
   ]);
 
   return (
-    <View style={tailwind("bg-primary h-full")}>
+    <SafeAreaView style={tailwind("bg-primary h-full")}>
       <AppBar showBack={false} />
       <View style={tailwind("flex items-start mt-12")}>
         <Text style={tailwind("text-white text-4xl font-mon-bold mb-4 mx-6")}>
@@ -299,7 +299,7 @@ const AboutYouPage = () => {
           disabled={loading}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
