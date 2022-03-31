@@ -6,11 +6,11 @@ import Carousel, { Pagination } from "react-native-snap-carousel";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
-import type { RootStackParamList } from "../routes";
+import type { RootStackParamList } from "../../routes";
 
-import FpLogo from "../../assets/icons/fpLogo.svg";
-import BgShade from "../../assets/icons/bgShade.png";
-import FpButton from "../components/Button";
+import FpLogo from "../../../assets/icons/fpLogo.svg";
+import BgShade from "../../../assets/icons/bgShade.png";
+import FpButton from "../../components/common/Button";
 
 type IntroPageNavigationProps = StackNavigationProp<
   RootStackParamList,

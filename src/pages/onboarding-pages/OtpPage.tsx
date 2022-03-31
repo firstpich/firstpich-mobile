@@ -7,10 +7,10 @@ import { gql, useMutation } from "@apollo/client";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
-import type { RootStackParamList } from "../routes";
+import type { RootStackParamList } from "../../routes";
 
-import FpButton from "../components/Button";
-import BackButton from "../components/BackButton";
+import FpButton from "../../components/common/Button";
+import BackButton from "../../components/common/BackButton";
 
 export type OtpPageParams = {
   phone: string;

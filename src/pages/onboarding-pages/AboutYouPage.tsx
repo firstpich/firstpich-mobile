@@ -7,15 +7,15 @@ import { gql, useMutation, useQuery } from "@apollo/client";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
-import type { RootStackParamList } from "../routes";
+import type { RootStackParamList } from "../../routes";
 
-import FpButton from "../components/Button";
-import AppBar from "../components/AppBar";
-import GenderCard from "../components/GenderCard";
-import GenreCard from "../components/GenreCard";
+import FpButton from "../../components/common/Button";
+import AppBar from "../../components/common/AppBar";
+import GenderCard from "../../components/GenderCard";
+import GenreCard from "../../components/GenreCard";
 
-import { database } from "../db";
-import { LoginContext } from "../App";
+import { database } from "../../db";
+import { LoginContext } from "../../App";
 
 const possibleGenders = ["Male", "Female", "Others"];
 
