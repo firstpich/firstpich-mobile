@@ -11,7 +11,7 @@ import type { RootStackParamList } from "../../routes";
 
 import FpButton from "../../components/common/Button";
 import BackButton from "../../components/common/BackButton";
-import PhoneNumberInputField from "../../components/screens/onboarding/signup-screen-components/PhoneNumberInputField";
+import PhoneNumberInputField from "../../components/onboarding/signup-screen/PhoneNumberInputField";
 
 type GetStartedNavigationProps = StackNavigationProp<
   RootStackParamList,

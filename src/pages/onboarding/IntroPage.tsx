@@ -12,8 +12,8 @@ import BgShade from "../../../assets/icons/bgShade.png";
 
 // Components
 import NextButton from "../../components/common/Button";
-import CarouselCard from "../../components/screens/onboarding/intro-screen-components/CarouselCard";
-import FirstPichLogoText from "../../components/screens/onboarding/intro-screen-components/FirstPichLogoText";
+import CarouselCard from "../../components/onboarding/intro-screen/CarouselCard";
+import FirstPichLogoText from "../../components/onboarding/intro-screen/FirstPichLogoText";
 
 type IntroPageNavigationProps = StackNavigationProp<
   RootStackParamList,

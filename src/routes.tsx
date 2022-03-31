@@ -6,16 +6,16 @@ import {
   createStackNavigator,
 } from "@react-navigation/stack";
 
-import { OtpPageParams } from "./pages/onboarding-pages/OtpPage";
-import { AboutYouPageParams } from "./pages/onboarding-pages/AboutYouPage";
+import { OtpPageParams } from "./pages/onboarding/OtpPage";
+import { AboutYouPageParams } from "./pages/onboarding/AboutYouPage";
 
-import IntroPage from "./pages/onboarding-pages/IntroPage";
-import GetStartedPage from "./pages/onboarding-pages/GetStartedPage";
-import SignUp from "./pages/onboarding-pages/SignUp";
-import OtpPage from "./pages/onboarding-pages/OtpPage";
-import AboutYouPage from "./pages/onboarding-pages/AboutYouPage";
+import IntroPage from "./pages/onboarding/IntroPage";
+import GetStartedPage from "./pages/onboarding/GetStartedPage";
+import SignUp from "./pages/onboarding/SignUp";
+import OtpPage from "./pages/onboarding/OtpPage";
+import AboutYouPage from "./pages/onboarding/AboutYouPage";
 
-import Home from "./pages/home-pages/Home";
+import Home from "./pages/home/Home";
 
 import { LoginContext } from "./App";
 
