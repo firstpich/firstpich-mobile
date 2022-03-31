@@ -1,23 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { View, Text, TextInput } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
-type NumberInputProps = {
-  signUpStateSetter: any;
+type PhoneNumberInputProps = {
+  phoneNumber: string;
+  setPhoneNumber: React.Dispatch<React.SetStateAction<string>>;
+  errorText?: string;
 };
 
-const NumberInputField: React.FC<NumberInputProps> = ({
-  signUpStateSetter,
+const PhoneNumberInputField: React.FC<PhoneNumberInputProps> = ({
+  phoneNumber,
+  setPhoneNumber,
+  errorText = "",
 }) => {
   const tailwind = useTailwind();
-
-  const thereIsGraphQLError =
-    (signUpStateSetter.error &&
-      signUpStateSetter.error.graphQLErrors.length !== 0) ||
-    false;
-  const thereIsNetworkError =
-    (signUpStateSetter.error && signUpStateSetter.error.networkError) || false;
-  const thereIsError = thereIsNetworkError || thereIsGraphQLError;
 
   return (
     <View style={tailwind("flex justify-center ml-4 py-12")}>
@@ -34,18 +30,20 @@ const NumberInputField: React.FC<NumberInputProps> = ({
           keyboardType="number-pad"
           maxLength={10}
           autoComplete="tel"
-          onChangeText={text => signUpStateSetter.setMobileNumber(text)}
-          value={signUpStateSetter.mobileNumber}
+          onChangeText={text => setPhoneNumber(text)}
+          value={phoneNumber}
           style={tailwind(
             "bg-input-fields-bg rounded-md w-11/12 text-white p-3 pl-10 text-base " +
-              (thereIsError ? "border-red-500 border" : ""),
+              (errorText ? "border-red-500 border" : ""),
           )}
         />
       </View>
-      {thereIsError && (
+      {errorText ? (
         <Text style={tailwind("mt-2 text-red-500 ml-0.5 text-xs")}>
-          Entered phone number looks invalid
+          {errorText}
         </Text>
+      ) : (
+        <></>
       )}
       <Text style={tailwind("mt-2 text-white ml-0.5 text-xs")}>
         You will recieve an OTP on the above number
@@ -54,4 +52,4 @@ const NumberInputField: React.FC<NumberInputProps> = ({
   );
 };
 
-export default NumberInputField;
+export default PhoneNumberInputField;

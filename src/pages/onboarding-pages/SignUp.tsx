@@ -11,7 +11,7 @@ import type { RootStackParamList } from "../../routes";
 
 import FpButton from "../../components/common/Button";
 import BackButton from "../../components/common/BackButton";
-import NumberInputField from "../../components/screens/onboarding/signup-screen-components/NumberInputField";
+import PhoneNumberInputField from "../../components/screens/onboarding/signup-screen-components/PhoneNumberInputField";
 
 type GetStartedNavigationProps = StackNavigationProp<
   RootStackParamList,
@@ -27,22 +27,27 @@ const SIGNUP = gql`
 const SignUp = () => {
   const tailwind = useTailwind();
   const navigation = useNavigation<GetStartedNavigationProps>();
-  const [mobileNumber, setMobileNumber] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
 
   const [signUp, { error, loading }] = useMutation(SIGNUP, {
     errorPolicy: "all",
   });
 
+  const thereIsGraphQLError =
+    (error && error.graphQLErrors.length !== 0) || false;
+  const thereIsNetworkError = (error && error.networkError) || false;
+  const thereIsError = thereIsNetworkError || thereIsGraphQLError;
+
   const onPressLoginButton = () => {
     signUp({
       variables: {
         phone: {
-          phone: mobileNumber,
+          phone: phoneNumber,
         },
       },
     }).then(({ errors }) => {
       if (!errors) {
-        navigation.navigate("OtpPage", { phone: mobileNumber });
+        navigation.navigate("OtpPage", { phone: phoneNumber });
       }
     });
   };
@@ -66,7 +71,11 @@ const SignUp = () => {
         </Text>
       </View>
 
-      <NumberInputField signUpStateSetter={setMobileNumber} />
+      <PhoneNumberInputField
+        phoneNumber={phoneNumber}
+        setPhoneNumber={setPhoneNumber}
+        errorText={thereIsError ? "Please check entered phone number" : ""}
+      />
 
       <View style={tailwind("mb-6")}>
         <FpButton
