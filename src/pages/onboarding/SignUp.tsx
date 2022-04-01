@@ -63,7 +63,7 @@ const SignUp = () => {
     <SafeAreaView style={tailwind("bg-primary h-full")}>
       <StatusBar backgroundColor="#0F0F0F" translucent={false} />
       <View style={tailwind("p-2 m-2")}>
-        <BackButton onPress={() => navigation.pop()} />
+        {/* <BackButton onPress={() => navigation.pop()} /> */}
       </View>
       <View style={tailwind("flex justify-center ml-4 mt-36 relative")}>
         <Text style={tailwind("text-white font-mon-light text-4xl mb-1")}>
