@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  SafeAreaView,
-} from "react-native";
+import { View, Text, TouchableOpacity, SafeAreaView } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
 import { gql, useMutation } from "@apollo/client";
@@ -15,8 +9,10 @@ import { StackNavigationProp } from "@react-navigation/stack";
 
 import type { RootStackParamList } from "../../routes";
 
-import FpButton from "../../components/common/Button";
+import EnterOtpButton from "../../components/common/Button";
 import BackButton from "../../components/common/BackButton";
+import OtpInputField from "../../components/onboarding/otp-screen/OtpInputField";
+import HeaderText from "../../components/onboarding/otp-screen/HeaderText";
 
 export type OtpPageParams = {
   phone: string;
@@ -71,7 +67,6 @@ const OtpPage = () => {
           otp,
         },
       },
-      // eslint-disable-next-line @typescript-eslint/no-shadow
     }).then(({ data, errors }) => {
       if (!errors && data.login.loggedIn === true) {
         navigation.reset({
@@ -96,48 +91,18 @@ const OtpPage = () => {
       <View style={tailwind("p-2 m-2")}>
         <BackButton onPress={SignUp} />
       </View>
-      <View style={tailwind("flex items-center -mt-12")}>
-        <Text
-          style={tailwind("text-white font-mon-bold text-xl tracking-wider")}>
-          firstpich
-        </Text>
-        <View style={tailwind("flex mt-36")}>
-          <Text
-            style={tailwind(
-              "text-white text-center font-mon-bold text-xl mt-2 mb-8 w-96",
-            )}>
-            One step closer! Check your text, we have sent you a verification
-            code
-          </Text>
-        </View>
-      </View>
-      <View style={tailwind("flex justify-center py-12")}>
-        <View style={tailwind("flex items-center")}>
-          <TextInput
-            placeholder="OTP"
-            placeholderTextColor="#FFFFFF"
-            keyboardType="number-pad"
-            maxLength={6}
-            textAlign="center"
-            onChangeText={text => setOtp(text)}
-            value={otp}
-            style={tailwind(
-              "bg-input-fields-bg rounded-md w-10/12 text-white text-2xl h-14 " +
-                (thereIsError ? "border-red-500 border" : ""),
-            )}
-          />
-        </View>
-        {thereIsError && (
-          <Text style={tailwind("mt-2 text-red-500 ml-10 text-xs")}>
-            OTP is invalid
-          </Text>
-        )}
-        <Text style={tailwind("mt-2 text-white ml-10 text-sm")}>
-          You will recieve an OTP on the above number
-        </Text>
-      </View>
+      <HeaderText
+        className="-mt-12"
+        otpText="One step closer! Check your text, we have sent you a verification code"
+      />
+      <OtpInputField
+        otp={otp}
+        setOtp={setOtp}
+        errorText={thereIsError ? "OTP is invalid" : ""}
+        className="py-12"
+      />
       <View style={tailwind("mb-6")}>
-        <FpButton
+        <EnterOtpButton
           title="Enter OTP"
           className="mx-4"
           disabled={loading}
