@@ -56,6 +56,7 @@ const AboutYouPage = () => {
   const { data: possibleGenres, loading: possibleGenresLoading } =
     useQuery(GET_GENRE);
   const { data: onboardingConfig } = useQuery(GET_MIN_MAX_GENRE_CONFIG);
+  console.log(possibleGenres);
 
   const [onboard, { loading }] = useMutation(ONBOARD, {
     errorPolicy: "all",
@@ -124,7 +125,7 @@ const AboutYouPage = () => {
         />
         <GenreQA
           possibleGenresLoading={possibleGenresLoading}
-          possibleGenres={possibleGenres.genres || []}
+          possibleGenres={possibleGenres ? possibleGenres.genres : []}
           genres={genres}
           setGenres={setGenres}
           errorText={errors.genre}
