@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
-import FirstPichLogo from "../../../../assets/icons/fpLogo.svg";
+import FirstPichLogo from "@assets/icons/fpLogo.svg";
 
 const FirstPichLogoText = () => {
   const tailwind = useTailwind();

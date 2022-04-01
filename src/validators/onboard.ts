@@ -1,4 +1,4 @@
-import type { ErrorTypes } from "../pages/onboarding/AboutYouPage";
+import type { ErrorTypes } from "@src/pages/onboarding/AboutYouPage";
 
 type ValidateOnboardingTypes = {
   name: string;
