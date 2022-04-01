@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import { View } from "react-native";
 
-import FpButton from "../components/Button";
+import FpButton from "../../components/common/Button";
 
-import { database } from "../db";
-import { LoginContext } from "../App";
+import { database } from "../../db";
+import { LoginContext } from "../../App";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
-import { RootStackParamList } from "../routes";
+import { RootStackParamList } from "../../routes";
 
 const Home = () => {
   const navigation =

@@ -1,32 +1,27 @@
 import React, { useState } from "react";
-import { View, Text, TextInput } from "react-native";
+import { View, Text, SafeAreaView } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
+import { SIGNUP } from "../../gql/auth";
 
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
+import type { RootStackParamList } from "../../routes";
 
-import type { RootStackParamList } from "../routes";
-
-import FpButton from "../components/Button";
-import BackButton from "../components/BackButton";
+import FpButton from "../../components/common/Button";
+import BackButton from "../../components/common/BackButton";
+import PhoneNumberInputField from "../../components/onboarding/signup-screen/PhoneNumberInputField";
 
 type GetStartedNavigationProps = StackNavigationProp<
   RootStackParamList,
   "SignUp"
 >;
 
-const SIGNUP = gql`
-  mutation sendOTP($phone: Phone!) {
-    sendOTP(phone: $phone)
-  }
-`;
-
 const SignUp = () => {
-  const navigation = useNavigation<GetStartedNavigationProps>();
-  const [mobileNumber, setMobileNumber] = useState<string>("");
   const tailwind = useTailwind();
+  const navigation = useNavigation<GetStartedNavigationProps>();
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
 
   const [signUp, { error, loading }] = useMutation(SIGNUP, {
     errorPolicy: "all",
@@ -41,18 +36,18 @@ const SignUp = () => {
     signUp({
       variables: {
         phone: {
-          phone: mobileNumber,
+          phone: phoneNumber,
         },
       },
     }).then(({ errors }) => {
       if (!errors) {
-        navigation.navigate("OtpPage", { phone: mobileNumber });
+        navigation.navigate("OtpPage", { phone: phoneNumber });
       }
     });
   };
 
   return (
-    <View style={tailwind("bg-primary h-full")}>
+    <SafeAreaView style={tailwind("bg-primary h-full")}>
       <View style={tailwind("p-2 m-2")}>
         <BackButton onPress={() => navigation.pop()} />
       </View>
@@ -70,37 +65,12 @@ const SignUp = () => {
         </Text>
       </View>
 
-      <View style={tailwind("flex justify-center ml-4 py-12")}>
-        <View>
-          <Text
-            style={tailwind(
-              "text-white font-mon-semibold absolute z-10 h-12 mt-4 ml-2 pt-px",
-            )}>
-            +91
-          </Text>
-          <TextInput
-            placeholder="Mobile Number"
-            placeholderTextColor="#FFFFFF"
-            keyboardType="number-pad"
-            maxLength={10}
-            autoComplete="tel"
-            onChangeText={text => setMobileNumber(text)}
-            value={mobileNumber}
-            style={tailwind(
-              "bg-input-fields-bg rounded-md w-11/12 text-white p-3 pl-10 text-base " +
-                (thereIsError ? "border-red-500 border" : ""),
-            )}
-          />
-        </View>
-        {thereIsError && (
-          <Text style={tailwind("mt-2 text-red-500 ml-0.5 text-xs")}>
-            Entered phone number looks invalid
-          </Text>
-        )}
-        <Text style={tailwind("mt-2 text-white ml-0.5 text-xs")}>
-          You will recieve an OTP on the above number
-        </Text>
-      </View>
+      <PhoneNumberInputField
+        phoneNumber={phoneNumber}
+        setPhoneNumber={setPhoneNumber}
+        errorText={thereIsError ? "Please check entered phone number" : ""}
+      />
+
       <View style={tailwind("mb-6")}>
         <FpButton
           title="Login"
@@ -109,7 +79,7 @@ const SignUp = () => {
           onPress={onPressLoginButton}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
