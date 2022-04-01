@@ -9,10 +9,11 @@ import { StackNavigationProp } from "@react-navigation/stack";
 
 import type { RootStackParamList } from "../../routes";
 
-import FpButton from "../../components/common/Button";
+import NextButton from "../../components/common/Button";
 import AppBar from "../../components/common/AppBar";
-import GenderCard from "../../components/GenderCard";
-import GenreCard from "../../components/GenreCard";
+import GenderCard from "../../components/onboarding/about-you-screen/GenderCard";
+import GenreCard from "../../components/onboarding/about-you-screen/GenreCard";
+import NameInput from "../../components/onboarding/about-you-screen/NameInput";
 
 import { database } from "../../db";
 import { LoginContext } from "../../App";
@@ -179,26 +180,7 @@ const AboutYouPage = () => {
     <SafeAreaView style={tailwind("bg-primary h-full")}>
       <AppBar showBack={false} />
       <View style={tailwind("flex items-start mt-12")}>
-        <Text style={tailwind("text-white text-4xl font-mon-bold mb-4 mx-6")}>
-          About You
-        </Text>
-        <TextInput
-          placeholder="Your Name"
-          placeholderTextColor="#FFFFFF"
-          keyboardType="default"
-          autoComplete="name"
-          value={name}
-          onChangeText={text => setName(text)}
-          style={tailwind(
-            "bg-input-fields-bg rounded-md w-96 text-white p-3 text-lg mx-5 " +
-              (errors.name ? "border-red-500 border" : ""),
-          )}
-        />
-        {errors.name && (
-          <Text style={tailwind("mt-2 text-red-500 ml-6 text-xs")}>
-            {errors.name}
-          </Text>
-        )}
+        <NameInput name={name} setName={setName} errorText={errors.name} />
         <Text
           style={tailwind("text-white text-lg font-mon-medium mb-4 mt-8 mx-6")}>
           How do you identify?
@@ -292,7 +274,7 @@ const AboutYouPage = () => {
         )}
       </View>
       <View style={tailwind("mt-4 w-full")}>
-        <FpButton
+        <NextButton
           title="Next"
           className="mx-4"
           onPress={onPressOnboard}
