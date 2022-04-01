@@ -4,12 +4,10 @@ import { View, SafeAreaView } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
 import { useMutation, useQuery } from "@apollo/client";
+import { GET_MIN_MAX_GENRE_CONFIG, GET_GENRE, ONBOARD } from "../../gql/auth";
 
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-
-import { GET_MIN_MAX_GENRE_CONFIG, GET_GENRE, ONBOARD } from "../../gql/auth";
-
 import type { RootStackParamList } from "../../routes";
 
 import NextButton from "../../components/common/Button";
@@ -17,6 +15,8 @@ import AppBar from "../../components/common/AppBar";
 import GenderQA from "../../components/onboarding/about-you-screen/GenderQA";
 import GenreQA from "../../components/onboarding/about-you-screen/GenreQA";
 import NameInput from "../../components/onboarding/about-you-screen/NameInput";
+
+import validateOnboarding from "../../validators/onboard";
 
 import { database } from "../../db";
 import { LoginContext } from "../../App";
@@ -30,7 +30,7 @@ type GetStartedNavigationProps = StackNavigationProp<
   "AboutYouPage"
 >;
 
-type ErrorTypes = {
+export type ErrorTypes = {
   name: string | null;
   gender: string | null;
   genre: string | null;
@@ -64,40 +64,15 @@ const AboutYouPage = () => {
   const { setIsLoggedIn } = useContext(LoginContext);
 
   const onPressOnboard = useCallback(() => {
-    const err: ErrorTypes = {
-      name: null,
-      gender: null,
-      genre: null,
-    };
+    const err = validateOnboarding({
+      name,
+      gender,
+      genres,
+      maxG: onboardingConfig.runtimeConfig.onboarding.max_genre_likes_selected,
+      minG: onboardingConfig.runtimeConfig.onboarding.min_genre_likes_selected,
+    });
 
-    if (name === "") {
-      err.name = "Name cannot be empty";
-      setError(e => ({ ...e, name: err.name }));
-    } else {
-      setError(e => ({ ...e, name: null }));
-    }
-
-    if (gender === "") {
-      err.gender = "Gender must be selected";
-      setError(e => ({ ...e, gender: err.gender }));
-    } else {
-      setError(e => ({ ...e, gender: null }));
-    }
-
-    const minG =
-      onboardingConfig.runtimeConfig.onboarding.min_genre_likes_selected;
-    const maxG =
-      onboardingConfig.runtimeConfig.onboarding.max_genre_likes_selected;
-
-    if (minG > genres.length || maxG < genres.length) {
-      err.genre = `You must select between ${minG} and ${maxG} genres as interests.`;
-      setError(e => ({
-        ...e,
-        genre: err.genre,
-      }));
-    } else {
-      setError(e => ({ ...e, genre: null }));
-    }
+    setError(err);
 
     if (!(err.name === null && err.gender === null && err.genre === null)) {
       return;
