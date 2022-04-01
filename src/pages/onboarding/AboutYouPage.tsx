@@ -4,22 +4,22 @@ import { View, SafeAreaView } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
 import { useMutation, useQuery } from "@apollo/client";
-import { GET_MIN_MAX_GENRE_CONFIG, GET_GENRE, ONBOARD } from "../../gql/auth";
+import { GET_MIN_MAX_GENRE_CONFIG, GET_GENRE, ONBOARD } from "@src/gql/auth";
 
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import type { RootStackParamList } from "../../routes";
+import type { RootStackParamList } from "@src/routes";
 
-import NextButton from "../../components/common/Button";
-import AppBar from "../../components/common/AppBar";
-import GenderQA from "../../components/onboarding/about-you-screen/GenderQA";
-import GenreQA from "../../components/onboarding/about-you-screen/GenreQA";
-import NameInput from "../../components/onboarding/about-you-screen/NameInput";
+import NextButton from "@components/common/Button";
+import AppBar from "@components/common/AppBar";
+import GenderQA from "@components/onboarding/about-you-screen/GenderQA";
+import GenreQA from "@components/onboarding/about-you-screen/GenreQA";
+import NameInput from "@components/onboarding/about-you-screen/NameInput";
 
-import validateOnboarding from "../../validators/onboard";
+import validateOnboarding from "@validators/onboard";
 
-import { database } from "../../db";
-import { LoginContext } from "../../App";
+import { database } from "@db/index";
+import { LoginContext } from "@src/App";
 
 export type AboutYouPageParams = {
   nonOnboardedToken: string;

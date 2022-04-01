@@ -3,16 +3,17 @@ import { View, Text, TouchableOpacity, SafeAreaView } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
 import { useMutation } from "@apollo/client";
-import { LOGIN } from "../../gql/auth";
+import { LOGIN } from "@src/gql/auth";
 
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import type { RootStackParamList } from "../../routes";
 
-import EnterOtpButton from "../../components/common/Button";
-import BackButton from "../../components/common/BackButton";
-import OtpInputField from "../../components/onboarding/otp-screen/OtpInputField";
-import HeaderText from "../../components/onboarding/otp-screen/HeaderText";
+import type { RootStackParamList } from "@src/routes";
+
+import EnterOtpButton from "@components/common/Button";
+import BackButton from "@components/common/BackButton";
+import OtpInputField from "@components/onboarding/otp-screen/OtpInputField";
+import HeaderText from "@components/onboarding/otp-screen/HeaderText";
 
 export type OtpPageParams = {
   phone: string;

@@ -5,10 +5,11 @@ import { useTailwind } from "tailwind-rn";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
-import type { RootStackParamList } from "../../routes";
+import type { RootStackParamList } from "@src/routes";
 
-import GetStartedBg from "../../../assets/icons/getStartedBg.png";
-import FpButton from "../../components/common/Button";
+import GetStartedBg from "@assets/icons/getStartedBg.png";
+
+import FpButton from "@components/common/Button";
 
 type GetStartedNavigationProps = StackNavigationProp<
   RootStackParamList,

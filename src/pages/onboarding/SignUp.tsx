@@ -3,15 +3,16 @@ import { View, Text, SafeAreaView } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
 import { useMutation } from "@apollo/client";
-import { SIGNUP } from "../../gql/auth";
+import { SIGNUP } from "@src/gql/auth";
 
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import type { RootStackParamList } from "../../routes";
 
-import FpButton from "../../components/common/Button";
-import BackButton from "../../components/common/BackButton";
-import PhoneNumberInputField from "../../components/onboarding/signup-screen/PhoneNumberInputField";
+import type { RootStackParamList } from "@src/routes";
+
+import FpButton from "@components/common/Button";
+import BackButton from "@components/common/BackButton";
+import PhoneNumberInputField from "@components/onboarding/signup-screen/PhoneNumberInputField";
 
 type GetStartedNavigationProps = StackNavigationProp<
   RootStackParamList,

@@ -5,13 +5,13 @@ import { useTailwind } from "tailwind-rn";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
-import type { RootStackParamList } from "../../routes";
+import type { RootStackParamList } from "@src/routes";
 
-import BgShade from "../../../assets/icons/bgShade.png";
+import BgShade from "@assets/icons/bgShade.png";
 
-import Button from "../../components/common/Button";
-import CarouselCard from "../../components/onboarding/intro-screen/CarouselCard";
-import FirstPichLogoText from "../../components/onboarding/intro-screen/FirstPichLogoText";
+import Button from "@components/common/Button";
+import CarouselCard from "@components/onboarding/intro-screen/CarouselCard";
+import FirstPichLogoText from "@components/onboarding/intro-screen/FirstPichLogoText";
 
 type IntroPageNavigationProps = StackNavigationProp<
   RootStackParamList,
