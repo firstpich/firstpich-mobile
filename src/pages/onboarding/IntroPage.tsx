@@ -7,11 +7,9 @@ import { StackNavigationProp } from "@react-navigation/stack";
 
 import type { RootStackParamList } from "../../routes";
 
-// Assets
 import BgShade from "../../../assets/icons/bgShade.png";
 
-// Components
-import NextButton from "../../components/common/Button";
+import Button from "../../components/common/Button";
 import CarouselCard from "../../components/onboarding/intro-screen/CarouselCard";
 import FirstPichLogoText from "../../components/onboarding/intro-screen/FirstPichLogoText";
 
@@ -34,7 +32,7 @@ const IntroPage = () => {
           </View>
         </View>
         <View style={tailwind("absolute w-full bottom-6")}>
-          <NextButton
+          <Button
             title="Next"
             className="mx-4"
             onPress={() => navigation.navigate("GetStartedPage")}

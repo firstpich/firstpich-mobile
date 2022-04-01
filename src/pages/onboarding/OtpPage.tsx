@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity, SafeAreaView } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
+import { LOGIN } from "../../gql/auth";
 
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-
 import type { RootStackParamList } from "../../routes";
 
 import EnterOtpButton from "../../components/common/Button";
@@ -18,33 +18,18 @@ export type OtpPageParams = {
   phone: string;
 };
 
-const LOGIN = gql`
-  mutation login($phoneOtp: PhoneOTP!) {
-    login(phoneOtp: $phoneOtp) {
-      loggedIn
-      nonOnboardedToken
-      user {
-        phone
-      }
-      tokens {
-        accessToken
-        refreshToken
-      }
-    }
-  }
-`;
-
 type GetStartedNavigationProps = StackNavigationProp<
   RootStackParamList,
   "OtpPage"
 >;
 
 const OtpPage = () => {
+  const tailwind = useTailwind();
+
   const navigation = useNavigation<GetStartedNavigationProps>();
   const {
     params: { phone },
   } = useRoute<RouteProp<RootStackParamList, "OtpPage">>();
-  const tailwind = useTailwind();
 
   const [otp, setOtp] = useState<string>("");
 
@@ -67,14 +52,15 @@ const OtpPage = () => {
           otp,
         },
       },
-    }).then(({ data, errors }) => {
-      if (!errors && data.login.loggedIn === true) {
+      // eslint-disable-next-line @typescript-eslint/no-shadow
+    }).then(({ data: { login }, errors }) => {
+      if (!errors && login.loggedIn === true) {
         navigation.reset({
           index: 0,
           routes: [
             {
               name: "AboutYouPage",
-              params: { nonOnboardedToken: data.login.nonOnboardedToken },
+              params: { nonOnboardedToken: login.nonOnboardedToken },
             },
           ],
         });

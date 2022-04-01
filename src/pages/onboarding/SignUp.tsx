@@ -1,29 +1,22 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, SafeAreaView } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
+import { SIGNUP } from "../../gql/auth";
 
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-
 import type { RootStackParamList } from "../../routes";
 
 import FpButton from "../../components/common/Button";
 import BackButton from "../../components/common/BackButton";
 import PhoneNumberInputField from "../../components/onboarding/signup-screen/PhoneNumberInputField";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 type GetStartedNavigationProps = StackNavigationProp<
   RootStackParamList,
   "SignUp"
 >;
-
-const SIGNUP = gql`
-  mutation sendOTP($phone: Phone!) {
-    sendOTP(phone: $phone)
-  }
-`;
 
 const SignUp = () => {
   const tailwind = useTailwind();

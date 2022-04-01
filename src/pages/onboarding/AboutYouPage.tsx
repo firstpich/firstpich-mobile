@@ -1,68 +1,29 @@
 import React, { useCallback, useContext, useState } from "react";
-import { View, TextInput, Text, FlatList, SafeAreaView } from "react-native";
+import { View, Text, FlatList, SafeAreaView } from "react-native";
+
 import { useTailwind } from "tailwind-rn";
 
-import { gql, useMutation, useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
+
+import { GET_MIN_MAX_GENRE_CONFIG, GET_GENRE, ONBOARD } from "../../gql/auth";
 
 import type { RootStackParamList } from "../../routes";
 
 import NextButton from "../../components/common/Button";
 import AppBar from "../../components/common/AppBar";
-import GenderCard from "../../components/onboarding/about-you-screen/GenderCard";
+import GenderQA from "../../components/onboarding/about-you-screen/GenderQA";
 import GenreCard from "../../components/onboarding/about-you-screen/GenreCard";
 import NameInput from "../../components/onboarding/about-you-screen/NameInput";
 
 import { database } from "../../db";
 import { LoginContext } from "../../App";
 
-const possibleGenders = ["Male", "Female", "Others"];
-
 export type AboutYouPageParams = {
   nonOnboardedToken: string;
 };
-
-const getMinMaxGenreConfig = gql`
-  query onboardingConfig {
-    runtimeConfig {
-      onboarding {
-        min_genre_likes_selected
-        max_genre_likes_selected
-      }
-    }
-  }
-`;
-
-const getGenres = gql`
-  query genres {
-    genres
-  }
-`;
-
-const ONBOARD = gql`
-  mutation onboard(
-    $onBoardingArgs: OnBoardingArgs!
-    $nonOnboardedToken: String!
-  ) {
-    onboard(
-      onBoardingArgs: $onBoardingArgs
-      nonOnboardedToken: $nonOnboardedToken
-    ) {
-      user {
-        id
-        phone
-        name
-        gender
-      }
-      tokens {
-        accessToken
-        refreshToken
-      }
-    }
-  }
-`;
 
 type GetStartedNavigationProps = StackNavigationProp<
   RootStackParamList,
@@ -76,11 +37,11 @@ type ErrorTypes = {
 };
 
 const AboutYouPage = () => {
+  const tailwind = useTailwind();
   const navigation = useNavigation<GetStartedNavigationProps>();
   const {
     params: { nonOnboardedToken },
   } = useRoute<RouteProp<RootStackParamList, "AboutYouPage">>();
-  const tailwind = useTailwind();
 
   const [name, setName] = useState<string>("");
   const [gender, setGender] = useState<string>("");
@@ -93,8 +54,8 @@ const AboutYouPage = () => {
   });
 
   const { data: possibleGenres, loading: possibleGenresLoading } =
-    useQuery(getGenres);
-  const { data: onboardingConfig } = useQuery(getMinMaxGenreConfig);
+    useQuery(GET_GENRE);
+  const { data: onboardingConfig } = useQuery(GET_MIN_MAX_GENRE_CONFIG);
 
   const [onboard, { loading }] = useMutation(ONBOARD, {
     errorPolicy: "all",
@@ -181,29 +142,11 @@ const AboutYouPage = () => {
       <AppBar showBack={false} />
       <View style={tailwind("flex items-start mt-12")}>
         <NameInput name={name} setName={setName} errorText={errors.name} />
-        <Text
-          style={tailwind("text-white text-lg font-mon-medium mb-4 mt-8 mx-6")}>
-          How do you identify?
-        </Text>
-        <View style={tailwind("flex flex-row mx-5")}>
-          <FlatList
-            data={possibleGenders}
-            horizontal
-            renderItem={({ item, index }) => (
-              <GenderCard
-                className={index === possibleGenders.length - 1 ? "" : "mr-6"}
-                genderType={item}
-                selected={gender === item}
-                onPress={() => setGender(item)}
-              />
-            )}
-          />
-        </View>
-        {errors.gender && (
-          <Text style={tailwind("mt-2 text-red-500 ml-6 text-xs")}>
-            {errors.gender}
-          </Text>
-        )}
+        <GenderQA
+          gender={gender}
+          setGender={setGender}
+          errorText={errors.gender}
+        />
         <Text
           style={tailwind("text-white text-lg font-mon-medium mb-4 mt-8 ml-6")}>
           What genre do you like to read?
