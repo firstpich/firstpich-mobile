@@ -1,5 +1,11 @@
 import React, { useContext, useState } from "react";
-import { View, Text, TouchableOpacity, SafeAreaView } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  SafeAreaView,
+  StatusBar,
+} from "react-native";
 import { useTailwind } from "tailwind-rn";
 
 import { useMutation } from "@apollo/client";
@@ -92,6 +98,7 @@ const OtpPage = () => {
 
   return (
     <SafeAreaView style={tailwind("bg-primary h-full")}>
+      <StatusBar backgroundColor="#0F0F0F" translucent={false} />
       <View style={tailwind("p-2 m-2")}>
         <BackButton onPress={SignUp} />
       </View>

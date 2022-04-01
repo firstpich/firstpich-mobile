@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, SafeAreaView } from "react-native";
+import { View, Text, SafeAreaView, StatusBar } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
 import { useMutation } from "@apollo/client";
@@ -49,8 +49,9 @@ const SignUp = () => {
 
   return (
     <SafeAreaView style={tailwind("bg-primary h-full")}>
+      <StatusBar backgroundColor="#0F0F0F" translucent={false} />
       <View style={tailwind("p-2 m-2")}>
-        {/* <BackButton onPress={() => navigation.pop()} /> */}
+        <BackButton onPress={() => navigation.pop()} />
       </View>
       <View style={tailwind("flex justify-center ml-4 mt-36 relative")}>
         <Text style={tailwind("text-white font-mon-light text-4xl mb-1")}>

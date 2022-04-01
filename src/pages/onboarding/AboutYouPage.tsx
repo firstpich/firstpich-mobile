@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useState } from "react";
-import { View, SafeAreaView } from "react-native";
+import { View, SafeAreaView, StatusBar } from "react-native";
 
 import { useTailwind } from "tailwind-rn";
 
@@ -117,6 +117,7 @@ const AboutYouPage = () => {
 
   return (
     <SafeAreaView style={tailwind("bg-primary h-full")}>
+      <StatusBar backgroundColor="#0F0F0F" translucent={false} />
       <AppBar showBack={false} />
       <View style={tailwind("flex items-start mt-12")}>
         <NameInput name={name} setName={setName} errorText={errors.name} />
