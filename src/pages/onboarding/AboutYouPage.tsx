@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useState } from "react";
-import { View, Text, FlatList, SafeAreaView } from "react-native";
+import { View, SafeAreaView } from "react-native";
 
 import { useTailwind } from "tailwind-rn";
 
@@ -15,7 +15,7 @@ import type { RootStackParamList } from "../../routes";
 import NextButton from "../../components/common/Button";
 import AppBar from "../../components/common/AppBar";
 import GenderQA from "../../components/onboarding/about-you-screen/GenderQA";
-import GenreCard from "../../components/onboarding/about-you-screen/GenreCard";
+import GenreQA from "../../components/onboarding/about-you-screen/GenreQA";
 import NameInput from "../../components/onboarding/about-you-screen/NameInput";
 
 import { database } from "../../db";
@@ -147,74 +147,13 @@ const AboutYouPage = () => {
           setGender={setGender}
           errorText={errors.gender}
         />
-        <Text
-          style={tailwind("text-white text-lg font-mon-medium mb-4 mt-8 ml-6")}>
-          What genre do you like to read?
-        </Text>
-        {!possibleGenresLoading && (
-          <View style={tailwind("flex flex-col")}>
-            <View style={tailwind("h-16")}>
-              <FlatList
-                data={possibleGenres.genres.slice(
-                  0,
-                  possibleGenres.genres.length / 2,
-                )}
-                horizontal
-                renderItem={({ item, index }) => (
-                  <GenreCard
-                    genre={item}
-                    selected={genres.includes(item)}
-                    onPress={() => {
-                      if (genres.includes(item)) {
-                        setGenres(genres.filter(g => g !== item));
-                      } else {
-                        setGenres(g => [...g, item]);
-                      }
-                    }}
-                    className={`${
-                      index === possibleGenres.genres.length / 2 - 1
-                        ? "mr-5"
-                        : "mr-4"
-                    }
-                  ${index === 0 ? "ml-5" : ""}`}
-                  />
-                )}
-              />
-            </View>
-            <View style={tailwind("h-16")}>
-              <FlatList
-                data={possibleGenres.genres.slice(
-                  possibleGenres.genres.length / 2,
-                )}
-                horizontal
-                renderItem={({ item, index }) => (
-                  <GenreCard
-                    genre={item}
-                    selected={genres.includes(item)}
-                    onPress={() => {
-                      if (genres.includes(item)) {
-                        setGenres(genres.filter(g => g !== item));
-                      } else {
-                        setGenres(g => [...g, item]);
-                      }
-                    }}
-                    className={`${
-                      index === possibleGenres.genres.length / 2 - 1
-                        ? "mr-5"
-                        : "mr-4"
-                    }
-                  ${index === 0 ? "ml-5" : ""}`}
-                  />
-                )}
-              />
-            </View>
-          </View>
-        )}
-        {errors.genre && (
-          <Text style={tailwind("mt-2 text-red-500 ml-6 text-xs")}>
-            {errors.genre}
-          </Text>
-        )}
+        <GenreQA
+          possibleGenresLoading={possibleGenresLoading}
+          possibleGenres={possibleGenres.genres || []}
+          genres={genres}
+          setGenres={setGenres}
+          errorText={errors.genre}
+        />
       </View>
       <View style={tailwind("mt-4 w-full")}>
         <NextButton
