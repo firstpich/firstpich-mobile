@@ -138,10 +138,13 @@ const AboutYouPage = () => {
   ]);
 
   return (
-    <SafeAreaView style={tailwind("bg-primary h-full")}>
-      <StatusBar backgroundColor="#0F0F0F" translucent={false} />
-      <AppBar showBack={false} />
-      <View style={tailwind("flex items-start mt-12")}>
+    <SafeAreaView
+      style={tailwind("flex flex-col justify-between bg-primary h-full")}>
+      <StatusBar backgroundColor="transparent" translucent={true} />
+      <View style={tailwind("")}>
+        <AppBar showBack={false} className="" />
+      </View>
+      <View style={tailwind("flex-grow py-20")}>
         <NameInput name={name} setName={setName} errorText={errors.name} />
         <GenderQA
           gender={gender}
@@ -163,7 +166,7 @@ const AboutYouPage = () => {
       ) : (
         <></>
       )}
-      <View style={tailwind("mt-4 w-full")}>
+      <View style={tailwind("bottom-6")}>
         <Button
           title="Next"
           className="mx-4"
