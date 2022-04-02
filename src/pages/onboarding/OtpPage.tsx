@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, StatusBar } from "react-native";
 import { useTailwind } from "tailwind-rn";
+import Toast from "react-native-simple-toast";
 
-import { useMutation } from "@apollo/client";
-import { LOGIN } from "@src/gql/auth";
+import { useMutation, useQuery } from "@apollo/client";
+import { LOGIN, RUNTIME_CONFIG, SIGNUP } from "@src/gql/auth";
 
 import { database } from "@db/index";
 
@@ -37,6 +38,7 @@ const OtpPage = () => {
   } = useRoute<RouteProp<RootStackParamList, "OtpPage">>();
 
   const [otp, setOtp] = useState<string>("");
+  const [resendIn, setResendIn] = useState<number>(30);
 
   const { setIsLoggedIn } = useContext(LoginContext);
 
@@ -47,6 +49,19 @@ const OtpPage = () => {
   useEffect(() => {
     reset();
   }, [otp, reset]);
+
+  const [resendOtp, { loading: resendOtpLoading }] = useMutation(SIGNUP, {
+    errorPolicy: "all",
+  });
+
+  const { data: rateLimits } = useQuery(RUNTIME_CONFIG);
+
+  useEffect(() => {
+    const t = setInterval(() => {
+      setResendIn(r => (r > 0 ? r - 1 : r));
+    }, 1000);
+    return () => clearInterval(t);
+  }, [setResendIn]);
 
   const otpRequestFailed = (data && data.login.loggedIn === false) || false;
   const thereIsGraphQLError =
@@ -60,6 +75,24 @@ const OtpPage = () => {
   } else if (thereIsNetworkError) {
     errorText = "Please check your network and try again";
   }
+
+  const onPressResendOTP = () => {
+    resendOtp({
+      variables: {
+        phone: {
+          phone,
+        },
+      },
+    })
+      .then(() => {
+        setOtp("");
+        setResendIn(
+          rateLimits.runtimeConfig.rate_limits.send_otp_ip_rate_limit.duration,
+        );
+        Toast.show("OTP sent successfully!");
+      })
+      .catch(console.log);
+  };
 
   const onPressEnterOTP = () => {
     login({
@@ -132,8 +165,12 @@ const OtpPage = () => {
       </View>
       <View style={tailwind("flex flex-row justify-center items-center py-5")}>
         <Text style={tailwind("mr-1 text-white")}>Haven’t recieved yet?</Text>
-        <TouchableOpacity disabled={loading}>
-          <Text style={tailwind("font-mon-bold text-white")}>Resend OTP</Text>
+        <TouchableOpacity
+          onPress={onPressResendOTP}
+          disabled={resendIn !== 0 || resendOtpLoading}>
+          <Text style={tailwind("font-mon-bold text-white py-2")}>
+            {resendIn === 0 ? "Resend OTP" : "Resend in " + resendIn}
+          </Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
