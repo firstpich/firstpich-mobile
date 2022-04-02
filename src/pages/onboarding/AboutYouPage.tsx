@@ -140,7 +140,6 @@ const AboutYouPage = () => {
   ]);
 
   return (
-<<<<<<< HEAD
     <SafeAreaView
       style={tailwind("flex flex-col justify-between bg-primary h-full")}>
       <KeyboardAwareScrollView contentContainerStyle={tailwind("flex-1")}>
@@ -149,13 +148,6 @@ const AboutYouPage = () => {
           <AppBar showBack={false} className="" />
         </View>
         <View style={tailwind("flex-grow")}>
-=======
-    <SafeAreaView style={tailwind("bg-primary h-full")}>
-      <KeyboardAwareScrollView>
-        <StatusBar backgroundColor="#0F0F0F" translucent={false} />
-        <AppBar showBack={false} />
-        <View style={tailwind("flex items-start mt-12")}>
->>>>>>> 4ffec5a (feat: keyboard avoiding view (#44))
           <NameInput name={name} setName={setName} errorText={errors.name} />
           <GenderQA
             gender={gender}
@@ -177,11 +169,7 @@ const AboutYouPage = () => {
         ) : (
           <></>
         )}
-<<<<<<< HEAD
         <View style={tailwind("mt-auto bottom-6")}>
-=======
-        <View style={tailwind("mt-4 w-full")}>
->>>>>>> 4ffec5a (feat: keyboard avoiding view (#44))
           <Button
             title="Next"
             className="mx-4"
