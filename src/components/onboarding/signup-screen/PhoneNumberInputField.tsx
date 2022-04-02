@@ -16,27 +16,27 @@ const PhoneNumberInputField: React.FC<PhoneNumberInputProps> = ({
   const tailwind = useTailwind();
 
   return (
-    <View style={tailwind("flex justify-center ml-4 py-12")}>
-      <View>
-        <Text
-          style={tailwind(
-            "text-white font-mon-semibold absolute z-10 h-12 mt-4 ml-2 pt-px",
-          )}>
-          +91
-        </Text>
-        <TextInput
-          placeholder="Mobile Number"
-          placeholderTextColor="#FFFFFF"
-          keyboardType="number-pad"
-          maxLength={10}
-          autoComplete="tel"
-          onChangeText={text => setPhoneNumber(text)}
-          value={phoneNumber}
-          style={tailwind(
-            "bg-input-fields-bg rounded-md w-11/12 text-white p-3 pl-10 text-base " +
-              (errorText ? "border-red-500 border" : ""),
-          )}
-        />
+    <View style={tailwind("flex mx-4 py-12")}>
+      <View style={tailwind("flex flex-row")}>
+        <View style={tailwind("absolute top-0 z-10 p-4 rounded-l-md")}>
+          <Text style={tailwind("text-white font-mon-semibold")}>+91</Text>
+        </View>
+        <View style={tailwind("pl-8 bg-input-fields-bg rounded-md w-full")}>
+          <TextInput
+            placeholder="Mobile Number"
+            placeholderTextColor="#FFFFFF"
+            keyboardType="number-pad"
+            maxLength={10}
+            autoComplete="tel"
+            onChangeText={text => setPhoneNumber(text)}
+            value={phoneNumber}
+            // textAlign="center"
+            style={tailwind(
+              "text-white p-4 font-mon-semibold " +
+                (errorText ? "border-red-500 border" : ""),
+            )}
+          />
+        </View>
       </View>
       {errorText ? (
         <Text style={tailwind("mt-2 text-red-500 ml-0.5 text-xs")}>
