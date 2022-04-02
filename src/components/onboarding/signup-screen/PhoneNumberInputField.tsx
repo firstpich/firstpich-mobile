@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TextInput } from "react-native";
+import { View, Text, TextInput, Platform } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
 type PhoneNumberInputProps = {
@@ -17,11 +17,17 @@ const PhoneNumberInputField: React.FC<PhoneNumberInputProps> = ({
 
   return (
     <View style={tailwind("flex mx-4 py-12")}>
-      <View style={tailwind("flex flex-row")}>
-        <View style={tailwind("absolute top-0 z-10 p-4 rounded-l-md")}>
-          <Text style={tailwind("text-white font-mon-semibold")}>+91</Text>
+      <View
+        style={tailwind(
+          "flex flex-row bg-input-fields-bg rounded-md " +
+            (errorText ? "border-red-500 border" : ""),
+        )}>
+        <View style={tailwind("flex justify-center pl-4 z-10")}>
+          <Text style={tailwind("text-white text-lg font-mon-semibold")}>
+            +91
+          </Text>
         </View>
-        <View style={tailwind("pl-8 bg-input-fields-bg rounded-md w-full")}>
+        <View style={tailwind("rounded-r-md w-full ")}>
           <TextInput
             placeholder="Mobile Number"
             placeholderTextColor="#FFFFFF"
@@ -30,10 +36,10 @@ const PhoneNumberInputField: React.FC<PhoneNumberInputProps> = ({
             autoComplete="tel"
             onChangeText={text => setPhoneNumber(text)}
             value={phoneNumber}
-            // textAlign="center"
             style={tailwind(
-              "text-white p-4 font-mon-semibold " +
-                (errorText ? "border-red-500 border" : ""),
+              `text-white p-4 font-mon-semibold text-lg ${
+                Platform.OS === "ios" ? "-mt-2" : ""
+              }`,
             )}
           />
         </View>
