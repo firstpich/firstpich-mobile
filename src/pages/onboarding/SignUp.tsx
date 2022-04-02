@@ -99,15 +99,6 @@ const SignUp = () => {
             loading={loading}
             onPress={onPressLoginButton}
           />
-
-          <View style={tailwind("mb-6")}>
-            <FpButton
-              title="Login"
-              className="mx-4"
-              disabled={loading}
-              onPress={onPressLoginButton}
-            />
-          </View>
         </View>
       </KeyboardAwareScrollView>
     </SafeAreaView>

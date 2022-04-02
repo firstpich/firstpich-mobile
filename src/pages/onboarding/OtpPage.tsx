@@ -166,20 +166,6 @@ const OtpPage = () => {
             onPress={onPressEnterOTP}
             loading={loading}
           />
-          <OtpInputField
-            otp={otp}
-            setOtp={setOtp}
-            errorText={errorText}
-            className="py-12"
-          />
-          <View style={tailwind("mb-6")}>
-            <FpButton
-              title="Enter OTP"
-              className="mx-4"
-              disabled={loading}
-              onPress={onPressEnterOTP}
-            />
-          </View>
           <View
             style={tailwind("flex flex-row justify-center items-center py-5")}>
             <Text style={tailwind("mr-1 text-white")}>
