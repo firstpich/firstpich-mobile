@@ -90,6 +90,7 @@ const SignUp = () => {
           title="Login"
           className="mx-4"
           disabled={loading}
+          loading={loading}
           onPress={onPressLoginButton}
         />
       </View>

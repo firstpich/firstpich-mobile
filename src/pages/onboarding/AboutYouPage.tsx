@@ -172,6 +172,7 @@ const AboutYouPage = () => {
           className="mx-4"
           onPress={onPressOnboard}
           disabled={loading}
+          loading={loading}
         />
       </View>
     </SafeAreaView>
