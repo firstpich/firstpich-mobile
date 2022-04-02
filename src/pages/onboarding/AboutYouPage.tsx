@@ -1,16 +1,17 @@
 import React, { useCallback, useContext, useState } from "react";
-import { View, SafeAreaView } from "react-native";
+import { View, StatusBar } from "react-native";
 
 import { useTailwind } from "tailwind-rn";
 
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_MIN_MAX_GENRE_CONFIG, GET_GENRE, ONBOARD } from "@src/gql/auth";
 
+import { SafeAreaView } from "react-native-safe-area-context";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import type { RootStackParamList } from "@src/routes";
 
-import NextButton from "@components/common/Button";
+import Button from "@components/common/Button";
 import AppBar from "@components/common/AppBar";
 import GenderQA from "@components/onboarding/about-you-screen/GenderQA";
 import GenreQA from "@components/onboarding/about-you-screen/GenreQA";
@@ -89,11 +90,14 @@ const AboutYouPage = () => {
       },
     }).then(async ({ data, errors: onboardingErrors }) => {
       if (!onboardingErrors) {
+        // Both access token and refresh token will be set
         await database.adapter.setLocal(
-          "refresh_token",
-          data.onboard.tokens.refreshToken,
+          "tokens",
+          JSON.stringify(data.onboard.tokens),
         );
+
         setIsLoggedIn(true);
+
         navigation.reset({
           index: 0,
           routes: [{ name: "Home" }],
@@ -114,6 +118,7 @@ const AboutYouPage = () => {
 
   return (
     <SafeAreaView style={tailwind("bg-primary h-full")}>
+      <StatusBar backgroundColor="#0F0F0F" translucent={false} />
       <AppBar showBack={false} />
       <View style={tailwind("flex items-start mt-12")}>
         <NameInput name={name} setName={setName} errorText={errors.name} />
@@ -130,8 +135,8 @@ const AboutYouPage = () => {
           errorText={errors.genre}
         />
       </View>
-      <View style={tailwind("mt-4 w-full")}>
-        <NextButton
+      <View style={tailwind("mt-4 w-full absolute bottom-12")}>
+        <Button
           title="Next"
           className="mx-4"
           onPress={onPressOnboard}

@@ -12,7 +12,10 @@ export const LOGIN = gql`
       loggedIn
       nonOnboardedToken
       user {
+        id
         phone
+        name
+        gender
       }
       tokens {
         accessToken
@@ -58,6 +61,17 @@ export const ONBOARD = gql`
         accessToken
         refreshToken
       }
+    }
+  }
+`;
+
+export const WHOAMI = gql`
+  query whoami {
+    whoami {
+      id
+      phone
+      name
+      gender
     }
   }
 `;

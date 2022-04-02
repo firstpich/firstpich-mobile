@@ -1,13 +1,17 @@
-import React, { useState } from "react";
-import { View, Text, TouchableOpacity, SafeAreaView } from "react-native";
+import React, { useContext, useState } from "react";
+import { View, Text, TouchableOpacity, StatusBar } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "@src/gql/auth";
 
+import { database } from "@db/index";
+
+import { SafeAreaView } from "react-native-safe-area-context";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
+import { LoginContext } from "@src/App";
 import type { RootStackParamList } from "@src/routes";
 
 import EnterOtpButton from "@components/common/Button";
@@ -34,6 +38,8 @@ const OtpPage = () => {
 
   const [otp, setOtp] = useState<string>("");
 
+  const { setIsLoggedIn } = useContext(LoginContext);
+
   const [login, { data, error, loading }] = useMutation(LOGIN, {
     errorPolicy: "all",
   });
@@ -54,8 +60,12 @@ const OtpPage = () => {
         },
       },
       // eslint-disable-next-line @typescript-eslint/no-shadow
-    }).then(({ data: { login }, errors }) => {
-      if (!errors && login.loggedIn === true) {
+    }).then(async ({ data: { login }, errors }) => {
+      if (errors || login.loggedIn !== true) {
+        return;
+      }
+
+      if (login.user === null || login.tokens === null) {
         navigation.reset({
           index: 0,
           routes: [
@@ -64,6 +74,14 @@ const OtpPage = () => {
               params: { nonOnboardedToken: login.nonOnboardedToken },
             },
           ],
+        });
+      } else {
+        await database.adapter.setLocal("tokens", JSON.stringify(login.tokens));
+        setIsLoggedIn(true);
+
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "Home" }],
         });
       }
     });
@@ -75,6 +93,7 @@ const OtpPage = () => {
 
   return (
     <SafeAreaView style={tailwind("bg-primary h-full")}>
+      <StatusBar backgroundColor="#0F0F0F" translucent={false} />
       <View style={tailwind("p-2 m-2")}>
         <BackButton onPress={SignUp} />
       </View>

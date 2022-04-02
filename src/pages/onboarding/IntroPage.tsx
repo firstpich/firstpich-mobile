@@ -1,7 +1,8 @@
 import React from "react";
-import { View, ImageBackground, SafeAreaView } from "react-native";
+import { View, ImageBackground, StatusBar } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
@@ -23,7 +24,10 @@ const IntroPage = () => {
   const tailwind = useTailwind();
 
   return (
-    <SafeAreaView style={tailwind("bg-primary h-full")}>
+    <SafeAreaView
+      style={tailwind("bg-primary h-full")}
+      edges={["right", "bottom", "left"]}>
+      <StatusBar backgroundColor="transparent" translucent={true} />
       <ImageBackground source={BgShade} imageStyle={tailwind("opacity-30")}>
         <View style={tailwind("flex flex-col justify-center h-full")}>
           <FirstPichLogoText />
