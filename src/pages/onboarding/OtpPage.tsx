@@ -1,9 +1,16 @@
 import React, { useContext, useState } from "react";
-import { View, Text, TouchableOpacity, SafeAreaView } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  SafeAreaView,
+  Alert,
+} from "react-native";
 import { useTailwind } from "tailwind-rn";
+import Toast from "react-native-simple-toast";
 
 import { useMutation } from "@apollo/client";
-import { LOGIN } from "@src/gql/auth";
+import { LOGIN, SIGNUP } from "@src/gql/auth";
 
 import { database } from "@db/index";
 
@@ -43,12 +50,30 @@ const OtpPage = () => {
     errorPolicy: "all",
   });
 
+  const [resendOtp] = useMutation(SIGNUP, {
+    errorPolicy: "all",
+  });
+
   const otpRequestFailed = (data && data.login.loggedIn === false) || false;
   const thereIsGraphQLError =
     (error && error.graphQLErrors.length !== 0) || false;
   const thereIsNetworkError = (error && error.networkError) || false;
   const thereIsError =
     otpRequestFailed || thereIsNetworkError || thereIsGraphQLError;
+
+  const onPressResendOTP = () => {
+    resendOtp({
+      variables: {
+        phone: {
+          phone,
+        },
+      },
+    })
+      .then(() => {
+        Toast.show("OTP sent successfully!");
+      })
+      .catch(console.log);
+  };
 
   const onPressEnterOTP = () => {
     login({
@@ -115,8 +140,10 @@ const OtpPage = () => {
       </View>
       <View style={tailwind("flex flex-row justify-center items-center py-5")}>
         <Text style={tailwind("mr-1 text-white")}>Haven’t recieved yet?</Text>
-        <TouchableOpacity disabled={loading}>
-          <Text style={tailwind("font-mon-bold text-white")}>Resend OTP</Text>
+        <TouchableOpacity onPress={onPressResendOTP}>
+          <Text style={tailwind("font-mon-bold text-white py-2")}>
+            Resend OTP
+          </Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
