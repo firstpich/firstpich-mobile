@@ -1,16 +1,10 @@
-import React, { useContext, useState } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  SafeAreaView,
-  Alert,
-} from "react-native";
+import React, { useContext, useEffect, useState } from "react";
+import { View, Text, TouchableOpacity, SafeAreaView } from "react-native";
 import { useTailwind } from "tailwind-rn";
 import Toast from "react-native-simple-toast";
 
-import { useMutation } from "@apollo/client";
-import { LOGIN, SIGNUP } from "@src/gql/auth";
+import { useMutation, useQuery } from "@apollo/client";
+import { LOGIN, RUNTIME_CONFIG, SIGNUP } from "@src/gql/auth";
 
 import { database } from "@db/index";
 
@@ -43,6 +37,7 @@ const OtpPage = () => {
   } = useRoute<RouteProp<RootStackParamList, "OtpPage">>();
 
   const [otp, setOtp] = useState<string>("");
+  const [resendIn, setResendIn] = useState<number>(30);
 
   const { setIsLoggedIn } = useContext(LoginContext);
 
@@ -50,9 +45,18 @@ const OtpPage = () => {
     errorPolicy: "all",
   });
 
-  const [resendOtp] = useMutation(SIGNUP, {
+  const [resendOtp, { loading: resendOtpLoading }] = useMutation(SIGNUP, {
     errorPolicy: "all",
   });
+
+  const { data: rateLimits } = useQuery(RUNTIME_CONFIG);
+
+  useEffect(() => {
+    const t = setInterval(() => {
+      setResendIn(r => (r > 0 ? r - 1 : r));
+    }, 1000);
+    return () => clearInterval(t);
+  }, [setResendIn]);
 
   const otpRequestFailed = (data && data.login.loggedIn === false) || false;
   const thereIsGraphQLError =
@@ -70,6 +74,10 @@ const OtpPage = () => {
       },
     })
       .then(() => {
+        setOtp("");
+        setResendIn(
+          rateLimits.runtimeConfig.rate_limits.send_otp_ip_rate_limit.duration,
+        );
         Toast.show("OTP sent successfully!");
       })
       .catch(console.log);
@@ -140,9 +148,11 @@ const OtpPage = () => {
       </View>
       <View style={tailwind("flex flex-row justify-center items-center py-5")}>
         <Text style={tailwind("mr-1 text-white")}>Haven’t recieved yet?</Text>
-        <TouchableOpacity onPress={onPressResendOTP}>
+        <TouchableOpacity
+          onPress={onPressResendOTP}
+          disabled={resendIn !== 0 || resendOtpLoading}>
           <Text style={tailwind("font-mon-bold text-white py-2")}>
-            Resend OTP
+            {resendIn === 0 ? "Resend OTP" : "Resend in " + resendIn}
           </Text>
         </TouchableOpacity>
       </View>
