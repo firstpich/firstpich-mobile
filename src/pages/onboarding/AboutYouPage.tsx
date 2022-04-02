@@ -1,6 +1,8 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { View, Text, StatusBar } from "react-native";
 
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+
 import { useTailwind } from "tailwind-rn";
 
 import { useMutation, useQuery } from "@apollo/client";
@@ -140,41 +142,43 @@ const AboutYouPage = () => {
   return (
     <SafeAreaView
       style={tailwind("flex flex-col justify-between bg-primary h-full")}>
-      <StatusBar backgroundColor="transparent" translucent={true} />
-      <View style={tailwind("")}>
-        <AppBar showBack={false} className="" />
-      </View>
-      <View style={tailwind("flex-grow py-20")}>
-        <NameInput name={name} setName={setName} errorText={errors.name} />
-        <GenderQA
-          gender={gender}
-          setGender={setGender}
-          errorText={errors.gender}
-        />
-        <GenreQA
-          possibleGenresLoading={possibleGenresLoading}
-          possibleGenres={possibleGenres ? possibleGenres.genres : []}
-          genres={genres}
-          setGenres={setGenres}
-          errorText={errors.genre}
-        />
-      </View>
-      {errorText ? (
-        <Text style={tailwind("mt-2 text-red-500 ml-8 text-xs")}>
-          {errorText}
-        </Text>
-      ) : (
-        <></>
-      )}
-      <View style={tailwind("bottom-6")}>
-        <Button
-          title="Next"
-          className="mx-4"
-          onPress={onPressOnboard}
-          disabled={loading}
-          loading={loading}
-        />
-      </View>
+      <KeyboardAwareScrollView contentContainerStyle={tailwind("flex-1")}>
+        <StatusBar backgroundColor="#0F0F0F" translucent={true} />
+        <View style={tailwind("pb-20")}>
+          <AppBar showBack={false} className="" />
+        </View>
+        <View style={tailwind("flex-grow")}>
+          <NameInput name={name} setName={setName} errorText={errors.name} />
+          <GenderQA
+            gender={gender}
+            setGender={setGender}
+            errorText={errors.gender}
+          />
+          <GenreQA
+            possibleGenresLoading={possibleGenresLoading}
+            possibleGenres={possibleGenres ? possibleGenres.genres : []}
+            genres={genres}
+            setGenres={setGenres}
+            errorText={errors.genre}
+          />
+        </View>
+        {errorText ? (
+          <Text style={tailwind("mt-2 text-red-500 ml-8 text-xs")}>
+            {errorText}
+          </Text>
+        ) : (
+          <></>
+        )}
+        <View style={tailwind("mt-auto bottom-6")}>
+          <Button
+            title="Next"
+            className="mx-4"
+            onPress={onPressOnboard}
+            disabled={loading}
+            loading={loading}
+          />
+        </View>
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 };
