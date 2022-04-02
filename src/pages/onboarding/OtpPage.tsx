@@ -48,8 +48,14 @@ const OtpPage = () => {
   const thereIsGraphQLError =
     (error && error.graphQLErrors.length !== 0) || false;
   const thereIsNetworkError = (error && error.networkError) || false;
-  const thereIsError =
-    otpRequestFailed || thereIsNetworkError || thereIsGraphQLError;
+
+  let errorText = "";
+
+  if (otpRequestFailed || thereIsGraphQLError) {
+    errorText = "Entered OTP is invalid";
+  } else if (thereIsNetworkError) {
+    errorText = "Please check your network and try again";
+  }
 
   const onPressEnterOTP = () => {
     login({
@@ -104,7 +110,7 @@ const OtpPage = () => {
       <OtpInputField
         otp={otp}
         setOtp={setOtp}
-        errorText={thereIsError ? "OTP is invalid" : ""}
+        errorText={errorText}
         className="py-12"
       />
       <View style={tailwind("mb-6")}>

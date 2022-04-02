@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useState } from "react";
-import { View, StatusBar } from "react-native";
+import { View, Text, StatusBar } from "react-native";
 
 import { useTailwind } from "tailwind-rn";
 
@@ -58,9 +58,21 @@ const AboutYouPage = () => {
     useQuery(GET_GENRE);
   const { data: onboardingConfig } = useQuery(GET_MIN_MAX_GENRE_CONFIG);
 
-  const [onboard, { loading }] = useMutation(ONBOARD, {
+  const [onboard, { loading, error }] = useMutation(ONBOARD, {
     errorPolicy: "all",
   });
+
+  const thereIsGraphQLError =
+    (error && error.graphQLErrors.length !== 0) || false;
+  const thereIsNetworkError = (error && error.networkError) || false;
+
+  let errorText = "";
+
+  if (thereIsGraphQLError) {
+    errorText = "Please check entered input";
+  } else if (thereIsNetworkError) {
+    errorText = "Please check your network and try again";
+  }
 
   const { setIsLoggedIn } = useContext(LoginContext);
 
@@ -135,7 +147,14 @@ const AboutYouPage = () => {
           errorText={errors.genre}
         />
       </View>
-      <View style={tailwind("mt-4 w-full absolute bottom-12")}>
+      {errorText ? (
+        <Text style={tailwind("mt-2 text-red-500 ml-8 text-xs")}>
+          {errorText}
+        </Text>
+      ) : (
+        <></>
+      )}
+      <View style={tailwind("mt-4 w-full")}>
         <Button
           title="Next"
           className="mx-4"
