@@ -1,16 +1,17 @@
 import React, { useCallback, useContext, useState } from "react";
-import { View, SafeAreaView, StatusBar } from "react-native";
+import { View, StatusBar } from "react-native";
 
 import { useTailwind } from "tailwind-rn";
 
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_MIN_MAX_GENRE_CONFIG, GET_GENRE, ONBOARD } from "@src/gql/auth";
 
+import { SafeAreaView } from "react-native-safe-area-context";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import type { RootStackParamList } from "@src/routes";
 
-import NextButton from "@components/common/Button";
+import Button from "@components/common/Button";
 import AppBar from "@components/common/AppBar";
 import GenderQA from "@components/onboarding/about-you-screen/GenderQA";
 import GenreQA from "@components/onboarding/about-you-screen/GenreQA";
@@ -134,8 +135,8 @@ const AboutYouPage = () => {
           errorText={errors.genre}
         />
       </View>
-      <View style={tailwind("mt-4 w-full")}>
-        <NextButton
+      <View style={tailwind("mt-4 w-full absolute bottom-12")}>
+        <Button
           title="Next"
           className="mx-4"
           onPress={onPressOnboard}

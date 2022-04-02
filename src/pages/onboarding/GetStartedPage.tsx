@@ -1,7 +1,8 @@
 import React from "react";
-import { View, Text, ImageBackground, SafeAreaView } from "react-native";
+import { View, Text, ImageBackground } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
@@ -21,7 +22,9 @@ const GetStartedPage = () => {
   const tailwind = useTailwind();
 
   return (
-    <SafeAreaView style={tailwind("bg-primary h-full")}>
+    <SafeAreaView
+      style={tailwind("bg-primary")}
+      edges={["right", "bottom", "left"]}>
       <ImageBackground source={GetStartedBg}>
         <View style={tailwind("flex flex-col justify-center h-full")}>
           <View

@@ -15,7 +15,7 @@ const NameInput: React.FC<NameInputProps> = ({
 }) => {
   const tailwind = useTailwind();
   return (
-    <View>
+    <View style={tailwind("w-full")}>
       <Text style={tailwind("text-white text-4xl font-mon-bold mb-4 mx-6")}>
         About You
       </Text>
@@ -27,7 +27,7 @@ const NameInput: React.FC<NameInputProps> = ({
         value={name}
         onChangeText={text => setName(text)}
         style={tailwind(
-          "bg-input-fields-bg rounded-md w-96 text-white p-3 text-lg mx-5 " +
+          "bg-input-fields-bg rounded-md text-white p-3 text-lg mx-5 " +
             (errorText ? "border-red-500 border" : ""),
         )}
       />
