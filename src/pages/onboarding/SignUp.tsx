@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StatusBar } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
@@ -25,14 +25,25 @@ const SignUp = () => {
   const navigation = useNavigation<GetStartedNavigationProps>();
   const [phoneNumber, setPhoneNumber] = useState<string>("");
 
-  const [signUp, { error, loading }] = useMutation(SIGNUP, {
+  const [signUp, { error, loading, reset }] = useMutation(SIGNUP, {
     errorPolicy: "all",
   });
+
+  useEffect(() => {
+    reset();
+  }, [phoneNumber, reset]);
 
   const thereIsGraphQLError =
     (error && error.graphQLErrors.length !== 0) || false;
   const thereIsNetworkError = (error && error.networkError) || false;
-  const thereIsError = thereIsNetworkError || thereIsGraphQLError;
+
+  let errorText = "";
+
+  if (thereIsGraphQLError) {
+    errorText = "Please check entered phone number";
+  } else if (thereIsNetworkError) {
+    errorText = "Please check your network and try again";
+  }
 
   const onPressLoginButton = () => {
     signUp({
@@ -71,7 +82,7 @@ const SignUp = () => {
       <PhoneNumberInputField
         phoneNumber={phoneNumber}
         setPhoneNumber={setPhoneNumber}
-        errorText={thereIsError ? "Please check entered phone number" : ""}
+        errorText={errorText}
       />
 
       <View style={tailwind("mb-6")}>

@@ -1,5 +1,5 @@
-import React, { useCallback, useContext, useState } from "react";
-import { View, StatusBar } from "react-native";
+import React, { useCallback, useContext, useEffect, useState } from "react";
+import { View, Text, StatusBar } from "react-native";
 
 import { useTailwind } from "tailwind-rn";
 
@@ -37,6 +37,12 @@ export type ErrorTypes = {
   genre: string | null;
 };
 
+const errorInitialValue = {
+  name: null,
+  gender: null,
+  genre: null,
+};
+
 const AboutYouPage = () => {
   const tailwind = useTailwind();
   const navigation = useNavigation<GetStartedNavigationProps>();
@@ -48,19 +54,32 @@ const AboutYouPage = () => {
   const [gender, setGender] = useState<string>("");
   const [genres, setGenres] = useState<string[]>([]);
 
-  const [errors, setError] = useState<ErrorTypes>({
-    name: null,
-    gender: null,
-    genre: null,
-  });
+  const [errors, setError] = useState<ErrorTypes>(errorInitialValue);
 
   const { data: possibleGenres, loading: possibleGenresLoading } =
     useQuery(GET_GENRE);
   const { data: onboardingConfig } = useQuery(GET_MIN_MAX_GENRE_CONFIG);
 
-  const [onboard, { loading }] = useMutation(ONBOARD, {
+  const [onboard, { loading, error, reset }] = useMutation(ONBOARD, {
     errorPolicy: "all",
   });
+
+  useEffect(() => {
+    setError(errorInitialValue);
+    reset();
+  }, [name, gender, genres, reset, error]);
+
+  const thereIsGraphQLError =
+    (error && error.graphQLErrors.length !== 0) || false;
+  const thereIsNetworkError = (error && error.networkError) || false;
+
+  let errorText = "";
+
+  if (thereIsGraphQLError) {
+    errorText = "Please check entered input";
+  } else if (thereIsNetworkError) {
+    errorText = "Please check your network and try again";
+  }
 
   const { setIsLoggedIn } = useContext(LoginContext);
 
@@ -88,22 +107,24 @@ const AboutYouPage = () => {
         },
         nonOnboardedToken,
       },
-    }).then(async ({ data, errors: onboardingErrors }) => {
-      if (!onboardingErrors) {
-        // Both access token and refresh token will be set
-        await database.adapter.setLocal(
-          "tokens",
-          JSON.stringify(data.onboard.tokens),
-        );
+    })
+      .then(async ({ data, errors: onboardingErrors }) => {
+        if (!onboardingErrors) {
+          // Both access token and refresh token will be set
+          await database.adapter.setLocal(
+            "tokens",
+            JSON.stringify(data.onboard.tokens),
+          );
 
-        setIsLoggedIn(true);
+          setIsLoggedIn(true);
 
-        navigation.reset({
-          index: 0,
-          routes: [{ name: "Home" }],
-        });
-      }
-    });
+          navigation.reset({
+            index: 0,
+            routes: [{ name: "Home" }],
+          });
+        }
+      })
+      .catch(console.log);
   }, [
     onboardingConfig,
     nonOnboardedToken,
@@ -135,7 +156,14 @@ const AboutYouPage = () => {
           errorText={errors.genre}
         />
       </View>
-      <View style={tailwind("mt-4 w-full absolute bottom-12")}>
+      {errorText ? (
+        <Text style={tailwind("mt-2 text-red-500 ml-8 text-xs")}>
+          {errorText}
+        </Text>
+      ) : (
+        <></>
+      )}
+      <View style={tailwind("mt-4 w-full")}>
         <Button
           title="Next"
           className="mx-4"
