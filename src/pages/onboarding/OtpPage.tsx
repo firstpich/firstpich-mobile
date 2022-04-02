@@ -15,7 +15,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { LoginContext } from "@src/App";
 import type { RootStackParamList } from "@src/routes";
 
-import EnterOtpButton from "@components/common/Button";
+import FpButton from "@components/common/Button";
 import BackButton from "@components/common/BackButton";
 import OtpInputField from "@components/onboarding/otp-screen/OtpInputField";
 import HeaderText from "@components/onboarding/otp-screen/HeaderText";
@@ -156,11 +156,12 @@ const OtpPage = () => {
         className="py-12"
       />
       <View style={tailwind("mb-6")}>
-        <EnterOtpButton
+        <FpButton
           title="Enter OTP"
           className="mx-4"
           disabled={loading}
           onPress={onPressEnterOTP}
+          loading={loading}
         />
       </View>
       <View style={tailwind("flex flex-row justify-center items-center py-5")}>
