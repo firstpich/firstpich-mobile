@@ -4,7 +4,7 @@ import { View, Text, StatusBar } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
 import { useMutation, useQuery } from "@apollo/client";
-import { GET_MIN_MAX_GENRE_CONFIG, GET_GENRE, ONBOARD } from "@src/gql/auth";
+import { RUNTIME_CONFIG, GET_GENRE, ONBOARD } from "@src/gql/auth";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
@@ -58,7 +58,7 @@ const AboutYouPage = () => {
 
   const { data: possibleGenres, loading: possibleGenresLoading } =
     useQuery(GET_GENRE);
-  const { data: onboardingConfig } = useQuery(GET_MIN_MAX_GENRE_CONFIG);
+  const { data: onboardingConfig } = useQuery(RUNTIME_CONFIG);
 
   const [onboard, { loading, error, reset }] = useMutation(ONBOARD, {
     errorPolicy: "all",

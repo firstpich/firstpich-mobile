@@ -25,17 +25,6 @@ export const LOGIN = gql`
   }
 `;
 
-export const GET_MIN_MAX_GENRE_CONFIG = gql`
-  query onboardingConfig {
-    runtimeConfig {
-      onboarding {
-        min_genre_likes_selected
-        max_genre_likes_selected
-      }
-    }
-  }
-`;
-
 export const GET_GENRE = gql`
   query genres {
     genres
@@ -72,6 +61,24 @@ export const WHOAMI = gql`
       phone
       name
       gender
+    }
+  }
+`;
+
+export const RUNTIME_CONFIG = gql`
+  query otpResendConfig {
+    runtimeConfig {
+      onboarding {
+        min_genre_likes_selected
+        max_genre_likes_selected
+      }
+      rate_limits {
+        send_otp_ip_rate_limit {
+          points
+          duration
+          blockDuration
+        }
+      }
     }
   }
 `;
