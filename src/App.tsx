@@ -1,7 +1,14 @@
 import React, { useEffect, createContext, useState, useCallback } from "react";
 import { TailwindProvider } from "tailwind-rn";
 
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  HttpLink,
+  from,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 
 import SplashScreen from "react-native-splash-screen";
 
@@ -10,11 +17,17 @@ import { BACKEND_URI } from "./config";
 import utilities from "../tailwind.json";
 import Routing from "./routes";
 
-import { database } from "./db";
+import { database } from "@db/index";
+
+import _authMiddleware from "@src/utils/authMiddleware";
+
+const httpLink = new HttpLink({ uri: BACKEND_URI });
+
+const authMiddleware = setContext(_authMiddleware);
 
 const client = new ApolloClient({
-  uri: BACKEND_URI,
   cache: new InMemoryCache(),
+  link: from([authMiddleware, httpLink]),
 });
 
 type LoginContextType = {
@@ -31,11 +44,8 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   const setup = useCallback(async () => {
-    // Fetch Is LoggedIn / Database Check / Get Access Token
-    const refresh_token = await database.adapter.getLocal("refresh_token");
-    if (refresh_token) setIsLoggedIn(true);
-    else setIsLoggedIn(false);
-
+    const tokens = await database.adapter.getLocal("tokens");
+    setIsLoggedIn(!!tokens);
     SplashScreen.hide();
   }, [setIsLoggedIn]);
 

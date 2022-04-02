@@ -89,11 +89,14 @@ const AboutYouPage = () => {
       },
     }).then(async ({ data, errors: onboardingErrors }) => {
       if (!onboardingErrors) {
+        // Both access token and refresh token will be set
         await database.adapter.setLocal(
-          "refresh_token",
-          data.onboard.tokens.refreshToken,
+          "tokens",
+          JSON.stringify(data.onboard.tokens),
         );
+
         setIsLoggedIn(true);
+
         navigation.reset({
           index: 0,
           routes: [{ name: "Home" }],
