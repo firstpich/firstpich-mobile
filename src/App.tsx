@@ -11,7 +11,6 @@ import {
 import { setContext } from "@apollo/client/link/context";
 
 import SplashScreen from "react-native-splash-screen";
-import Toast from "react-native-toast-message";
 
 import { BACKEND_URI } from "./config";
 
