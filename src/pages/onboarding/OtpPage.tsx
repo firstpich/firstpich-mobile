@@ -3,6 +3,8 @@ import { View, Text, TouchableOpacity, StatusBar } from "react-native";
 import { useTailwind } from "tailwind-rn";
 import Toast from "react-native-simple-toast";
 
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+
 import { useMutation, useQuery } from "@apollo/client";
 import { LOGIN, RUNTIME_CONFIG, SIGNUP } from "@src/gql/auth";
 
@@ -141,39 +143,44 @@ const OtpPage = () => {
 
   return (
     <SafeAreaView style={tailwind("bg-primary h-full")}>
-      <StatusBar backgroundColor="#0F0F0F" translucent={false} />
-      <View style={tailwind("p-2 m-2")}>
-        <BackButton onPress={SignUp} />
-      </View>
-      <HeaderText
-        className="-mt-12"
-        otpText="One step closer! Check your text, we have sent you a verification code"
-      />
-      <OtpInputField
-        otp={otp}
-        setOtp={setOtp}
-        errorText={errorText}
-        className="py-12"
-      />
-      <View style={tailwind("mb-6")}>
-        <FpButton
-          title="Enter OTP"
-          className="mx-4"
-          disabled={loading}
-          onPress={onPressEnterOTP}
-          loading={loading}
+      <KeyboardAwareScrollView>
+        <StatusBar backgroundColor="#0F0F0F" translucent={false} />
+        <View style={tailwind("p-2 m-2")}>
+          <BackButton onPress={SignUp} />
+        </View>
+        <HeaderText
+          className="-mt-12"
+          otpText="One step closer! Check your text, we have sent you a verification code"
         />
-      </View>
-      <View style={tailwind("flex flex-row justify-center items-center py-5")}>
-        <Text style={tailwind("mr-1 text-white")}>Haven’t recieved yet?</Text>
-        <TouchableOpacity
-          onPress={onPressResendOTP}
-          disabled={resendIn !== 0 || resendOtpLoading}>
-          <Text style={tailwind("font-mon-bold text-white py-2")}>
-            {resendIn === 0 ? "Resend OTP" : "Resend in " + resendIn}
-          </Text>
-        </TouchableOpacity>
-      </View>
+        <OtpInputField
+          otp={otp}
+          setOtp={setOtp}
+          errorText={errorText}
+          className="py-12"
+        />
+        <View style={tailwind("mb-6")}>
+          <FpButton
+            title="Enter OTP"
+            className="mx-4"
+            disabled={loading}
+            onPress={onPressEnterOTP}
+            loading={loading}
+          />
+          <View
+            style={tailwind("flex flex-row justify-center items-center py-5")}>
+            <Text style={tailwind("mr-1 text-white")}>
+              Haven’t recieved yet?
+            </Text>
+            <TouchableOpacity
+              onPress={onPressResendOTP}
+              disabled={resendIn !== 0 || resendOtpLoading}>
+              <Text style={tailwind("font-mon-bold text-white py-2")}>
+                {resendIn === 0 ? "Resend OTP" : "Resend in " + resendIn}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 };
