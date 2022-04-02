@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, StatusBar } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
@@ -40,9 +40,13 @@ const OtpPage = () => {
 
   const { setIsLoggedIn } = useContext(LoginContext);
 
-  const [login, { data, error, loading }] = useMutation(LOGIN, {
+  const [login, { data, error, loading, reset }] = useMutation(LOGIN, {
     errorPolicy: "all",
   });
+
+  useEffect(() => {
+    reset();
+  }, [otp, reset]);
 
   const otpRequestFailed = (data && data.login.loggedIn === false) || false;
   const thereIsGraphQLError =
@@ -65,32 +69,37 @@ const OtpPage = () => {
           otp,
         },
       },
+    })
       // eslint-disable-next-line @typescript-eslint/no-shadow
-    }).then(async ({ data: { login }, errors }) => {
-      if (errors || login.loggedIn !== true) {
-        return;
-      }
+      .then(async ({ data: { login }, errors }) => {
+        if (errors || login.loggedIn !== true) {
+          return;
+        }
 
-      if (login.user === null || login.tokens === null) {
-        navigation.reset({
-          index: 0,
-          routes: [
-            {
-              name: "AboutYouPage",
-              params: { nonOnboardedToken: login.nonOnboardedToken },
-            },
-          ],
-        });
-      } else {
-        await database.adapter.setLocal("tokens", JSON.stringify(login.tokens));
-        setIsLoggedIn(true);
+        if (login.user === null || login.tokens === null) {
+          navigation.reset({
+            index: 0,
+            routes: [
+              {
+                name: "AboutYouPage",
+                params: { nonOnboardedToken: login.nonOnboardedToken },
+              },
+            ],
+          });
+        } else {
+          await database.adapter.setLocal(
+            "tokens",
+            JSON.stringify(login.tokens),
+          );
+          setIsLoggedIn(true);
 
-        navigation.reset({
-          index: 0,
-          routes: [{ name: "Home" }],
-        });
-      }
-    });
+          navigation.reset({
+            index: 0,
+            routes: [{ name: "Home" }],
+          });
+        }
+      })
+      .catch(console.log);
   };
 
   const SignUp = () => {
