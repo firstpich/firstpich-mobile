@@ -26,6 +26,7 @@ const GenderQA: React.FC<GenderParams> = ({ gender, setGender, errorText }) => {
         <FlatList
           data={possibleGenders}
           horizontal
+          showsHorizontalScrollIndicator={false}
           renderItem={({ item, index }) => (
             <GenderCard
               className={index === possibleGenders.length - 1 ? "" : "mr-6"}

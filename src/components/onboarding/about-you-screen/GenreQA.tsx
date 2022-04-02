@@ -34,6 +34,7 @@ const GenreQA: React.FC<GenreParams> = ({
             <FlatList
               data={possibleGenres.slice(0, possibleGenres.length / 2)}
               horizontal
+              showsHorizontalScrollIndicator={false}
               renderItem={({ item, index }) => (
                 <GenreCard
                   genre={item}
@@ -57,6 +58,7 @@ const GenreQA: React.FC<GenreParams> = ({
             <FlatList
               data={possibleGenres.slice(possibleGenres.length / 2)}
               horizontal
+              showsHorizontalScrollIndicator={false}
               renderItem={({ item, index }) => (
                 <GenreCard
                   genre={item}
