@@ -6,7 +6,11 @@ import Toast from "react-native-simple-toast";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import { useMutation, useQuery } from "@apollo/client";
-import { LOGIN, RUNTIME_CONFIG, SIGNUP } from "@src/gql/auth";
+
+import { LOGIN, RUNTIME_CONFIG, SENDOTP } from "@src/gql/auth";
+import { SendOTP, SendOTPVariables } from "@generated/SendOTP";
+import { Login, LoginVariables } from "@generated/Login";
+import { RuntimeConfig } from "@generated/RuntimeConfig";
 
 import { database } from "@db/index";
 
@@ -44,7 +48,10 @@ const OtpPage = () => {
 
   const { setIsLoggedIn } = useContext(LoginContext);
 
-  const [login, { data, error, loading, reset }] = useMutation(LOGIN, {
+  const [login, { data, error, loading, reset }] = useMutation<
+    Login,
+    LoginVariables
+  >(LOGIN, {
     errorPolicy: "all",
   });
 
@@ -52,11 +59,14 @@ const OtpPage = () => {
     reset();
   }, [otp, reset]);
 
-  const [resendOtp, { loading: resendOtpLoading }] = useMutation(SIGNUP, {
+  const [resendOtp, { loading: resendOtpLoading }] = useMutation<
+    SendOTP,
+    SendOTPVariables
+  >(SENDOTP, {
     errorPolicy: "all",
   });
 
-  const { data: rateLimits } = useQuery(RUNTIME_CONFIG);
+  const { data: rateLimits } = useQuery<RuntimeConfig>(RUNTIME_CONFIG);
 
   useEffect(() => {
     const t = setInterval(() => {
@@ -89,7 +99,8 @@ const OtpPage = () => {
       .then(() => {
         setOtp("");
         setResendIn(
-          rateLimits.runtimeConfig.rate_limits.send_otp_ip_rate_limit.duration,
+          rateLimits?.runtimeConfig.rate_limits.send_otp_ip_rate_limit
+            .duration || 30,
         );
         Toast.show("OTP sent successfully!");
       })
@@ -105,26 +116,25 @@ const OtpPage = () => {
         },
       },
     })
-      // eslint-disable-next-line @typescript-eslint/no-shadow
-      .then(async ({ data: { login }, errors }) => {
-        if (errors || login.loggedIn !== true) {
+      .then(async ({ data: rx, errors }) => {
+        if (errors || rx?.login.loggedIn !== true) {
           return;
         }
 
-        if (login.user === null || login.tokens === null) {
+        if (rx.login.user === null || rx.login.tokens === null) {
           navigation.reset({
             index: 0,
             routes: [
               {
                 name: "AboutYouPage",
-                params: { nonOnboardedToken: login.nonOnboardedToken },
+                params: { nonOnboardedToken: rx.login.nonOnboardedToken },
               },
             ],
           });
         } else {
           await database.adapter.setLocal(
             "tokens",
-            JSON.stringify(login.tokens),
+            JSON.stringify(rx.login.tokens),
           );
           setIsLoggedIn(true);
 
