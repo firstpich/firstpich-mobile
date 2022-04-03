@@ -12,6 +12,7 @@ module.exports = {
           "@components": "./src/components",
           "@db": "./src/db",
           "@validators": "./src/validators",
+          "@generated": "./src/gql/__generated__",
           "@src": "./src",
         },
       },

@@ -5,7 +5,9 @@ import { useTailwind } from "tailwind-rn";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import { useMutation } from "@apollo/client";
-import { SIGNUP } from "@src/gql/auth";
+
+import { SENDOTP } from "@src/gql/auth";
+import { SendOTP, SendOTPVariables } from "@generated/SendOTP";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
@@ -27,7 +29,10 @@ const SignUp = () => {
   const navigation = useNavigation<GetStartedNavigationProps>();
   const [phoneNumber, setPhoneNumber] = useState<string>("");
 
-  const [signUp, { error, loading, reset }] = useMutation(SIGNUP, {
+  const [signUp, { error, loading, reset }] = useMutation<
+    SendOTP,
+    SendOTPVariables
+  >(SENDOTP, {
     errorPolicy: "all",
   });
 

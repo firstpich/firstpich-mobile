@@ -1,13 +1,13 @@
 import { gql } from "@apollo/client";
 
-export const SIGNUP = gql`
-  mutation sendOTP($phone: Phone!) {
+export const SENDOTP = gql`
+  mutation SendOTP($phone: Phone!) {
     sendOTP(phone: $phone)
   }
 `;
 
 export const LOGIN = gql`
-  mutation login($phoneOtp: PhoneOTP!) {
+  mutation Login($phoneOtp: PhoneOTP!) {
     login(phoneOtp: $phoneOtp) {
       loggedIn
       nonOnboardedToken
@@ -25,14 +25,14 @@ export const LOGIN = gql`
   }
 `;
 
-export const GET_GENRE = gql`
-  query genres {
+export const GENRES = gql`
+  query Genres {
     genres
   }
 `;
 
 export const ONBOARD = gql`
-  mutation onboard(
+  mutation OnBoard(
     $onBoardingArgs: OnBoardingArgs!
     $nonOnboardedToken: String!
   ) {
@@ -55,7 +55,7 @@ export const ONBOARD = gql`
 `;
 
 export const WHOAMI = gql`
-  query whoami {
+  query Whoami {
     whoami {
       id
       phone
@@ -66,7 +66,7 @@ export const WHOAMI = gql`
 `;
 
 export const RUNTIME_CONFIG = gql`
-  query otpResendConfig {
+  query RuntimeConfig {
     runtimeConfig {
       onboarding {
         min_genre_likes_selected

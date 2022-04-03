@@ -6,7 +6,9 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { useTailwind } from "tailwind-rn";
 
 import { useMutation, useQuery } from "@apollo/client";
-import { RUNTIME_CONFIG, GET_GENRE, ONBOARD } from "@src/gql/auth";
+
+import { RUNTIME_CONFIG, GENRES, ONBOARD } from "@src/gql/auth";
+import { OnBoard, OnBoardVariables } from "@generated/OnBoard";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
@@ -23,6 +25,7 @@ import validateOnboarding from "@validators/onboard";
 
 import { database } from "@db/index";
 import { LoginContext } from "@src/App";
+import { RuntimeConfig } from "@generated/RuntimeConfig";
 
 export type AboutYouPageParams = {
   nonOnboardedToken: string;
@@ -59,10 +62,13 @@ const AboutYouPage = () => {
   const [errors, setError] = useState<ErrorTypes>(errorInitialValue);
 
   const { data: possibleGenres, loading: possibleGenresLoading } =
-    useQuery(GET_GENRE);
-  const { data: onboardingConfig } = useQuery(RUNTIME_CONFIG);
+    useQuery(GENRES);
+  const { data: onboardingConfig } = useQuery<RuntimeConfig>(RUNTIME_CONFIG);
 
-  const [onboard, { loading, error, reset }] = useMutation(ONBOARD, {
+  const [onboard, { loading, error, reset }] = useMutation<
+    OnBoard,
+    OnBoardVariables
+  >(ONBOARD, {
     errorPolicy: "all",
   });
 
@@ -90,8 +96,12 @@ const AboutYouPage = () => {
       name,
       gender,
       genres,
-      maxG: onboardingConfig.runtimeConfig.onboarding.max_genre_likes_selected,
-      minG: onboardingConfig.runtimeConfig.onboarding.min_genre_likes_selected,
+      maxG:
+        onboardingConfig?.runtimeConfig.onboarding.max_genre_likes_selected ||
+        3,
+      minG:
+        onboardingConfig?.runtimeConfig.onboarding.min_genre_likes_selected ||
+        6,
     });
 
     setError(err);
@@ -115,7 +125,7 @@ const AboutYouPage = () => {
           // Both access token and refresh token will be set
           await database.adapter.setLocal(
             "tokens",
-            JSON.stringify(data.onboard.tokens),
+            JSON.stringify(data?.onboard.tokens || ""),
           );
 
           setIsLoggedIn(true);
