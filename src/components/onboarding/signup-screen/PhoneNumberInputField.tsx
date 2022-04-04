@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TextInput, Platform } from "react-native";
+import { View, Text, TextInput } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
 type PhoneNumberInputProps = {
@@ -23,7 +23,7 @@ const PhoneNumberInputField: React.FC<PhoneNumberInputProps> = ({
             (errorText ? "border-red-500 border" : ""),
         )}>
         <View style={tailwind("flex justify-center pl-4 z-10")}>
-          <Text style={tailwind("text-white text-lg font-mon-semibold")}>
+          <Text style={tailwind("text-white text-lg font-mon-regular")}>
             +91
           </Text>
         </View>
@@ -36,11 +36,10 @@ const PhoneNumberInputField: React.FC<PhoneNumberInputProps> = ({
             autoComplete="tel"
             onChangeText={text => setPhoneNumber(text)}
             value={phoneNumber}
-            style={tailwind(
-              `text-white p-4 font-mon-semibold text-lg ${
-                Platform.OS === "ios" ? "-mt-2" : ""
-              }`,
-            )}
+            style={{
+              ...tailwind("text-white p-4 font-mon-regular -ml-2"),
+              fontSize: 18,
+            }}
           />
         </View>
       </View>

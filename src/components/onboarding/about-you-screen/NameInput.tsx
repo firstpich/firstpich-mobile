@@ -26,10 +26,9 @@ const NameInput: React.FC<NameInputProps> = ({
         autoComplete="name"
         value={name}
         onChangeText={text => setName(text)}
-        // eslint-disable-next-line react-native/no-inline-styles
         style={{
           ...tailwind(
-            "bg-input-fields-bg rounded-md text-white p-3 mx-5 " +
+            "bg-input-fields-bg rounded-md text-white p-4 mx-5 " +
               (errorText ? "border-red-500 border" : ""),
           ),
           fontSize: 18,

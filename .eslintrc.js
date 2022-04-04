@@ -8,5 +8,6 @@ module.exports = {
     "@typescript-eslint/no-shadow": ["error"],
     quotes: [2, "double", { avoidEscape: true }],
     "prettier/prettier": ["error", { singleQuote: false }],
+    "react-native/no-inline-styles": "off",
   },
 };

@@ -144,8 +144,8 @@ const AboutYouPage = () => {
       style={tailwind("flex flex-col justify-between bg-primary h-full")}>
       <KeyboardAwareScrollView contentContainerStyle={tailwind("flex-1")}>
         <StatusBar backgroundColor="#0F0F0F" translucent={true} />
-        <View style={tailwind("pb-20")}>
-          <AppBar showBack={false} className="" />
+        <View style={tailwind("pb-24")}>
+          <AppBar showBack={false} />
         </View>
         <View style={tailwind("flex-grow")}>
           <NameInput name={name} setName={setName} errorText={errors.name} />

@@ -63,11 +63,13 @@ const SignUp = () => {
 
   return (
     <SafeAreaView style={tailwind("bg-primary h-full")}>
-      <KeyboardAwareScrollView>
+      <View style={tailwind("p-2 m-2")}>
+        <BackButton onPress={() => navigation.pop()} />
+      </View>
+      <KeyboardAwareScrollView
+        extraScrollHeight={125}
+        keyboardOpeningTime={Number.MAX_SAFE_INTEGER}>
         <StatusBar backgroundColor="#0F0F0F" translucent={false} />
-        <View style={tailwind("p-2 m-2")}>
-          <BackButton onPress={() => navigation.pop()} />
-        </View>
         <View style={tailwind("flex justify-center ml-4 mt-36 relative")}>
           <Text style={tailwind("text-white font-mon-light text-4xl mb-1")}>
             welcome to
@@ -79,7 +81,7 @@ const SignUp = () => {
             firstpich
           </Text>
           <Text
-            style={tailwind("text-white font-mon-thin text-sm mt-2 w-11/12")}>
+            style={tailwind("text-white font-mon-light text-sm mt-2 w-11/12")}>
             firstpich is full of wonders and we know you are excited as much as
             we are excited
           </Text>
