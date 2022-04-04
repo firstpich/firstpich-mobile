@@ -32,6 +32,7 @@ const CarouselCard = ({}) => {
         itemWidth={Dimensions.get("window").width}
         autoplay={true}
         enableMomentum={true}
+        autoplayInterval={2300}
         lockScrollWhileSnapping={true}
         loop={true}
       />
