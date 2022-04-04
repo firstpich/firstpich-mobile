@@ -14,9 +14,6 @@ const HeaderText: React.FC<HeaderProps> = ({
   const tailwind = useTailwind();
   return (
     <View style={tailwind("flex items-center " + className)}>
-      <Text style={tailwind("text-white font-mon-bold text-xl tracking-wider")}>
-        firstpich
-      </Text>
       <View style={tailwind("flex mt-36")}>
         <Text
           style={tailwind(

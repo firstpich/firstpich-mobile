@@ -25,6 +25,7 @@ import FpButton from "@components/common/Button";
 import BackButton from "@components/common/BackButton";
 import OtpInputField from "@components/onboarding/otp-screen/OtpInputField";
 import HeaderText from "@components/onboarding/otp-screen/HeaderText";
+import AppBar from "@components/common/AppBar";
 
 export type OtpPageParams = {
   phone: string;
@@ -153,13 +154,15 @@ const OtpPage = () => {
 
   return (
     <SafeAreaView style={tailwind("bg-primary h-full")}>
-      <KeyboardAwareScrollView>
+      <View style={tailwind("p-2 m-2")}>
+        <AppBar showBack={true} onPress={SignUp} />
+      </View>
+      <KeyboardAwareScrollView
+        extraScrollHeight={150}
+        keyboardOpeningTime={Number.MAX_SAFE_INTEGER}>
         <StatusBar backgroundColor="#0F0F0F" translucent={false} />
-        <View style={tailwind("p-2 m-2")}>
-          <BackButton onPress={SignUp} />
-        </View>
         <HeaderText
-          className="-mt-12"
+          className=""
           otpText="One step closer! Check your text, we have sent you a verification code"
         />
         <OtpInputField
