@@ -26,10 +26,13 @@ const NameInput: React.FC<NameInputProps> = ({
         autoComplete="name"
         value={name}
         onChangeText={text => setName(text)}
-        style={tailwind(
-          "bg-input-fields-bg rounded-md text-white p-3 text-lg mx-5 " +
-            (errorText ? "border-red-500 border" : ""),
-        )}
+        style={{
+          ...tailwind(
+            "bg-input-fields-bg rounded-md text-white p-4 mx-5 " +
+              (errorText ? "border-red-500 border" : ""),
+          ),
+          fontSize: 18,
+        }}
       />
       {errorText && (
         <Text style={tailwind("mt-2 text-red-500 ml-6 text-xs")}>

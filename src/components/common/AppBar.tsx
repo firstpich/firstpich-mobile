@@ -1,19 +1,17 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Platform } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
 import Icon from "react-native-remix-icon";
 
 type ButtonProps = {
   title?: string;
-  className?: string;
   showBack?: boolean;
   onPress?: (() => void) | undefined;
 };
 
 const AppBar: React.FC<ButtonProps> = ({
   title = "firstpich",
-  className = "",
   onPress = () => {},
   showBack = true,
 }) => {
@@ -21,7 +19,9 @@ const AppBar: React.FC<ButtonProps> = ({
   return (
     <View
       style={tailwind(
-        "p-2 m-2 flex flex-row items-center justify-center " + className,
+        `flex flex-row items-center justify-center ${
+          Platform.OS === "android" ? "p-2 m-2" : ""
+        }`,
       )}>
       {showBack && (
         <TouchableOpacity
@@ -37,7 +37,7 @@ const AppBar: React.FC<ButtonProps> = ({
           />
         </TouchableOpacity>
       )}
-      <View style={tailwind("")}>
+      <View>
         <Text
           style={tailwind("font-mon-bold text-xl text-white tracking-wider")}>
           {title}
