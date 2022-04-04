@@ -152,12 +152,12 @@ const AboutYouPage = () => {
   return (
     <SafeAreaView
       style={tailwind("flex flex-col justify-between bg-primary h-full")}>
+      <View style={tailwind("")}>
+        <AppBar showBack={false} />
+      </View>
       <KeyboardAwareScrollView contentContainerStyle={tailwind("flex-1")}>
         <StatusBar backgroundColor="#0F0F0F" translucent={true} />
-        <View style={tailwind("pb-24")}>
-          <AppBar showBack={false} />
-        </View>
-        <View style={tailwind("flex-grow")}>
+        <View style={tailwind("flex-grow py-24")}>
           <NameInput name={name} setName={setName} errorText={errors.name} />
           <GenderQA
             gender={gender}
