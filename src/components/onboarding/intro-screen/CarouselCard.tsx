@@ -31,10 +31,9 @@ const CarouselCard = ({}) => {
         sliderWidth={Dimensions.get("window").width}
         itemWidth={Dimensions.get("window").width}
         autoplay={true}
-        enableMomentum={false}
+        enableMomentum={true}
         lockScrollWhileSnapping={true}
         loop={true}
-        scrollEnabled={false}
       />
       <Pagination
         dotsLength={carouselWords.length}
