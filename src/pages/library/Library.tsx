@@ -7,7 +7,7 @@ const Explore = () => {
     <SafeAreaView>
       <StatusBar backgroundColor="#0F0F0F" translucent={true} />
       <View>
-        <Text>This is explore page</Text>
+        <Text>This is library page</Text>
       </View>
     </SafeAreaView>
   );
