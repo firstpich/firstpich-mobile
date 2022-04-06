@@ -19,19 +19,19 @@ const FpButton: React.FC<ButtonProps> = ({
 }) => {
   const tailwind = useTailwind();
   return (
-    <TouchableOpacity disabled={disabled} onPress={onPress}>
-      <View
-        style={tailwind(
-          `flex flex-row p-3 rounded-3xl justify-center items-center ${
-            loading ? "bg-input-fields-bg" : "bg-white"
-          } ` + className,
-        )}>
-        {loading ? (
-          <ActivityIndicator style={tailwind("mr-2")} color="#ffffff" />
-        ) : (
-          <Text style={tailwind("text-black font-bold text-lg")}>{title}</Text>
-        )}
-      </View>
+    <TouchableOpacity
+      style={tailwind(
+        `flex flex-row p-3 rounded-3xl justify-center items-center ${
+          loading ? "bg-input-fields-bg" : "bg-white"
+        } ` + className,
+      )}
+      disabled={disabled}
+      onPress={onPress}>
+      {loading ? (
+        <ActivityIndicator style={tailwind("mr-2")} color="#ffffff" />
+      ) : (
+        <Text style={tailwind("text-black font-bold text-lg")}>{title}</Text>
+      )}
     </TouchableOpacity>
   );
 };

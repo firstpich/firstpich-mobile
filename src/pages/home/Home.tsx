@@ -63,8 +63,10 @@ const Home = () => {
               fetchData().catch(console.log);
             }}
           />
-          <Text>{String(loading)}</Text>
-          <Text>{JSON.stringify(data, null, 4)}</Text>
+          <Text style={tailwind("text-white")}>{String(loading)}</Text>
+          <Text style={tailwind("text-white")}>
+            {JSON.stringify(data, null, 4)}
+          </Text>
         </View>
       </KeyboardAwareScrollView>
     </SafeAreaView>

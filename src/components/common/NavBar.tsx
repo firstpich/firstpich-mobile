@@ -1,6 +1,6 @@
 import React from "react";
 import { useTailwind } from "tailwind-rn";
-import { View } from "react-native";
+import { Platform, View } from "react-native";
 import Icon from "react-native-remix-icon";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -21,7 +21,7 @@ const NavBar = () => {
       <Tab.Navigator
         initialRouteName="HomePage"
         screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, size, color }) => {
+          tabBarIcon: ({ focused, color }) => {
             let IconName;
 
             if (route.name === "HomePage") {
@@ -40,12 +40,18 @@ const NavBar = () => {
               IconName = focused ? "ri-user-fill" : "ri-user-line";
             }
 
-            return <Icon name={IconName} size={30} color={color} />;
+            return (
+              <Icon
+                name={IconName}
+                size={Platform.OS === "android" ? 30 : 25}
+                color={color}
+              />
+            );
           },
           tabBarStyle: {
             backgroundColor: "#1E1E1E",
-            height: 60,
-            paddingBottom: 5,
+            height: Platform.OS === "android" ? 60 : 82,
+            paddingBottom: Platform.OS === "android" ? 5 : 33,
             borderTopColor: "#1E1E1E",
           },
           tabBarActiveTintColor: "white",
