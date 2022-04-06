@@ -17,7 +17,7 @@ import FpButton from "@components/common/Button";
 
 import { WHOAMI } from "@src/gql/auth";
 import { useLazyQuery } from "@apollo/client";
-import NavBar from "@components/common/NavBar";
+// import NavBar from "@components/common/NavBar";
 import AppBar from "@components/common/AppBar";
 
 const Home = () => {
@@ -63,11 +63,13 @@ const Home = () => {
               fetchData().catch(console.log);
             }}
           />
+          <FpButton
+            title="go to navbar"
+            className="mt-20 mb-20"
+            onPress={() => navigation.navigate("NavBar")}
+          />
           <Text>{String(loading)}</Text>
           <Text>{JSON.stringify(data, null, 4)}</Text>
-        </View>
-        <View style={tailwind("mt-auto")}>
-          <NavBar />
         </View>
       </KeyboardAwareScrollView>
     </SafeAreaView>

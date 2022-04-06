@@ -2,7 +2,7 @@ import React from "react";
 import { SafeAreaView, StatusBar, Text, View } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
-const Explore = () => {
+const Create = () => {
   const tailwind = useTailwind();
   return (
     <SafeAreaView
@@ -11,10 +11,10 @@ const Explore = () => {
       )}>
       <StatusBar backgroundColor="#0F0F0F" translucent={true} />
       <View>
-        <Text style={tailwind("text-white")}>This is explore page</Text>
+        <Text style={tailwind("text-white")}>This is create page</Text>
       </View>
     </SafeAreaView>
   );
 };
 
-export default Explore;
+export default Create;

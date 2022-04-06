@@ -15,6 +15,8 @@ import SignUp from "./pages/onboarding/SignUp";
 import OtpPage from "./pages/onboarding/OtpPage";
 import AboutYouPage from "./pages/onboarding/AboutYouPage";
 
+import NavBar from "@components/common/NavBar";
+
 import Home from "./pages/home/Home";
 
 import { LoginContext } from "./App";
@@ -26,6 +28,7 @@ export type RootStackParamList = {
   OtpPage: OtpPageParams;
   AboutYouPage: AboutYouPageParams;
   Home: undefined;
+  NavBar: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -39,13 +42,22 @@ const Routing = () => {
         screenOptions={{ headerShown: false }}
         initialRouteName="Home">
         {isLoggedIn ? (
-          <Stack.Screen
-            name="Home"
-            options={{
-              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-            }}
-            component={Home}
-          />
+          <>
+            {/* <Stack.Screen
+              name="Home"
+              options={{
+                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+              }}
+              component={Home}
+            /> */}
+            <Stack.Screen
+              name="NavBar"
+              options={{
+                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+              }}
+              component={NavBar}
+            />
+          </>
         ) : (
           <>
             <Stack.Screen
