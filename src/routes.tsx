@@ -17,8 +17,6 @@ import AboutYouPage from "./pages/onboarding/AboutYouPage";
 
 import NavBar from "@components/common/NavBar";
 
-import Home from "./pages/home/Home";
-
 import { LoginContext } from "./App";
 
 export type RootStackParamList = {
@@ -43,13 +41,6 @@ const Routing = () => {
         initialRouteName="Home">
         {isLoggedIn ? (
           <>
-            {/* <Stack.Screen
-              name="Home"
-              options={{
-                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-              }}
-              component={Home}
-            /> */}
             <Stack.Screen
               name="NavBar"
               options={{
