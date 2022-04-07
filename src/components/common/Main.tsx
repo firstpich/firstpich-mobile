@@ -14,7 +14,7 @@ import CreatePage from "@src/pages/book/create";
 
 const Tab = createBottomTabNavigator();
 
-const NavBar = () => {
+const Main = () => {
   const tailwind = useTailwind();
   return (
     <View style={tailwind("flex flex-row justify-around bg-primary h-full")}>
@@ -65,4 +65,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default Main;

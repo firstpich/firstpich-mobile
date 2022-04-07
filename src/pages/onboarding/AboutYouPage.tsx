@@ -132,7 +132,7 @@ const AboutYouPage = () => {
 
           navigation.reset({
             index: 0,
-            routes: [{ name: "NavBar" }],
+            routes: [{ name: "Main" }],
           });
         }
       })
