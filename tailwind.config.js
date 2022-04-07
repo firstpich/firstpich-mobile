@@ -18,6 +18,7 @@ module.exports = {
         "grey-light": "#EEEFF8",
         "input-fields-bg": "#31343C",
         "dark-grey": "#1D1D1D",
+        "grey-black": "#1E1E1E",
       },
       fontFamily: {
         "mon-black": ["Montserrat-Black"],
