@@ -39,7 +39,7 @@ const Main = () => {
             return (
               <Icon
                 name={IconName}
-                size={Platform.OS === "android" ? 30 : 25}
+                size={Platform.OS === "android" ? 27 : 25}
                 color={color}
               />
             );
