@@ -22,23 +22,24 @@ const NavBar = () => {
         initialRouteName="HomePage"
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color }) => {
+<<<<<<< HEAD
             let IconName;
+=======
+            let IconName: string;
+>>>>>>> 2f45ecf (chore: completed navbar with type check enabled)
 
             if (route.name === "HomePage") {
               IconName = focused ? "ri-home-7-fill" : "ri-home-7-line";
-            }
-            if (route.name === "ExplorePage") {
+            } else if (route.name === "ExplorePage") {
               IconName = focused ? "ri-search-fill" : "ri-search-line";
-            }
-            if (route.name === "CreatePage") {
+            } else if (route.name === "CreatePage") {
               IconName = focused ? "ri-pencil-fill" : "ri-pencil-line";
-            }
-            if (route.name === "LibraryPage") {
+            } else if (route.name === "LibraryPage") {
               IconName = focused ? "ri-book-fill" : "ri-book-line";
-            }
-            if (route.name === "ProfilePage") {
+            } else {
               IconName = focused ? "ri-user-fill" : "ri-user-line";
             }
+<<<<<<< HEAD
 
             return (
               <Icon
@@ -47,6 +48,9 @@ const NavBar = () => {
                 color={color}
               />
             );
+=======
+            return <Icon name={IconName} size={30} color={color} />;
+>>>>>>> 2f45ecf (chore: completed navbar with type check enabled)
           },
           tabBarStyle: {
             backgroundColor: "#1E1E1E",
