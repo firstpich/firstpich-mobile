@@ -15,7 +15,7 @@ import SignUp from "./pages/onboarding/SignUp";
 import OtpPage from "./pages/onboarding/OtpPage";
 import AboutYouPage from "./pages/onboarding/AboutYouPage";
 
-import Main from "@components/common/Main";
+import Main from "@src/pages/Main";
 
 import { LoginContext } from "./App";
 
