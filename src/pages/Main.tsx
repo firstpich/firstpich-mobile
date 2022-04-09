@@ -10,7 +10,7 @@ import HomePage from "@src/pages/home/Home";
 import ExplorePage from "@src/pages/home/Explore";
 import LibraryPage from "@src/pages/library/Library";
 import ProfilePage from "@src/pages/profile/Profile";
-import CreatePage from "@src/pages/book/create";
+import CreatePage from "@src/pages/book/Create";
 
 const Tab = createBottomTabNavigator();
 
