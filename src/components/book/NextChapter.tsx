@@ -19,14 +19,14 @@ const NextChapter = () => {
       <View style={tailwind("mx-2")}>
         <Text style={tailwind("text-secondary-orange")}>Next Chapter</Text>
         <TextTicker
-          style={{ fontSize: 18, width: 60 }}
-          duration={3000}
+          style={{ fontSize: 18, width: 120 }}
+          duration={4000}
           loop
           bounce
+          bouncePadding={{ left: 0, right: 20 }}
           repeatSpacer={50}
-          marqueeDelay={1000}>
-          Super long piece of text is long. The quick brown fox jumps over the
-          lazy dog.
+          marqueeDelay={2000}>
+          Living in the midst
         </TextTicker>
       </View>
       <TouchableOpacity style={tailwind("")}>
