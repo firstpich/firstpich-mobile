@@ -63,6 +63,13 @@ const Home = () => {
               fetchData().catch(console.log);
             }}
           />
+          <FpButton
+            title="go to book page"
+            className="mt-20 mb-20"
+            onPress={() => {
+              navigation.navigate("BookPlayer");
+            }}
+          />
           <Text style={tailwind("text-white")}>{String(loading)}</Text>
           <Text style={tailwind("text-white")}>
             {JSON.stringify(data, null, 4)}

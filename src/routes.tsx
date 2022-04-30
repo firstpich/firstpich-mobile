@@ -16,6 +16,7 @@ import OtpPage from "./pages/onboarding/OtpPage";
 import AboutYouPage from "./pages/onboarding/AboutYouPage";
 
 import Main from "@src/pages/Main";
+import BookPlayer from "@src/pages/book/BookPlayer";
 
 import { LoginContext } from "./App";
 
@@ -27,6 +28,7 @@ export type RootStackParamList = {
   AboutYouPage: AboutYouPageParams;
   Home: undefined;
   Main: undefined;
+  BookPlayer: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -38,7 +40,7 @@ const Routing = () => {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{ headerShown: false }}
-        initialRouteName="Home">
+        initialRouteName="BookPlayer">
         {isLoggedIn ? (
           <>
             <Stack.Screen
@@ -47,6 +49,13 @@ const Routing = () => {
                 cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
               }}
               component={Main}
+            />
+            <Stack.Screen
+              name="BookPlayer"
+              options={{
+                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+              }}
+              component={BookPlayer}
             />
           </>
         ) : (
